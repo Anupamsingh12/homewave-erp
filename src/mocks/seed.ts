@@ -34,7 +34,7 @@ function rng(seed: number) {
 }
 
 const rand = rng(20260831);
-const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(rand() * arr.length)];
+const pick = <T>(arr: readonly T[]): T => arr[Math.floor(rand() * arr.length)]!;
 const int = (min: number, max: number) => min + Math.floor(rand() * (max - min + 1));
 const iso = (days: number, hour = 10, minute = 0) => {
   const d = new Date(SEED_NOW);
@@ -44,17 +44,65 @@ const iso = (days: number, hour = 10, minute = 0) => {
 };
 
 const FIRST = [
-  "Rajesh","Priya","Amit","Sneha","Vikram","Ananya","Rohit","Kavita","Suresh","Meera",
-  "Arjun","Divya","Karthik","Neha","Manish","Pooja","Sanjay","Ritu","Aditya","Shalini",
-  "Nikhil","Swati","Harish","Deepika","Vivek","Lakshmi","Rahul","Anjali","Prakash","Ishita",
+  "Rajesh",
+  "Priya",
+  "Amit",
+  "Sneha",
+  "Vikram",
+  "Ananya",
+  "Rohit",
+  "Kavita",
+  "Suresh",
+  "Meera",
+  "Arjun",
+  "Divya",
+  "Karthik",
+  "Neha",
+  "Manish",
+  "Pooja",
+  "Sanjay",
+  "Ritu",
+  "Aditya",
+  "Shalini",
+  "Nikhil",
+  "Swati",
+  "Harish",
+  "Deepika",
+  "Vivek",
+  "Lakshmi",
+  "Rahul",
+  "Anjali",
+  "Prakash",
+  "Ishita",
 ];
 const LAST = [
-  "Kumar","Sharma","Patel","Reddy","Iyer","Desai","Nair","Joshi","Mehta","Gupta",
-  "Chopra","Rao","Bhatia","Menon","Kulkarni","Agarwal",
+  "Kumar",
+  "Sharma",
+  "Patel",
+  "Reddy",
+  "Iyer",
+  "Desai",
+  "Nair",
+  "Joshi",
+  "Mehta",
+  "Gupta",
+  "Chopra",
+  "Rao",
+  "Bhatia",
+  "Menon",
+  "Kulkarni",
+  "Agarwal",
 ];
 const CITIES = ["Mumbai", "Pune", "Bangalore", "Delhi NCR", "Hyderabad"];
 const SOURCES: LeadSource[] = [
-  "WEBSITE","WALK_IN","REFERRAL","CHANNEL_PARTNER","FACEBOOK","GOOGLE_ADS","PROPERTY_PORTAL","EXHIBITION",
+  "WEBSITE",
+  "WALK_IN",
+  "REFERRAL",
+  "CHANNEL_PARTNER",
+  "FACEBOOK",
+  "GOOGLE_ADS",
+  "PROPERTY_PORTAL",
+  "EXHIBITION",
 ];
 const FACINGS = ["East", "West", "North", "North-East", "South-East", "Garden"];
 
@@ -97,7 +145,7 @@ export function buildSeed(): Database {
     id: `usr_${i + 1}`,
     ...stamp(-400),
     name: name as string,
-    email: `${(name as string).split(" ")[0].toLowerCase()}@buildwell.in`,
+    email: `${(name as string).split(" ")[0]!.toLowerCase()}@buildwell.in`,
     phone: `+91 9${int(100000000, 899999999)}`,
     role: role as User["role"],
     active: true,
@@ -157,7 +205,15 @@ export function buildSeed(): Database {
               ? rand() < 0.85
                 ? "AVAILABLE"
                 : "BLOCKED"
-              : pick(["AVAILABLE", "AVAILABLE", "AVAILABLE", "HOLD", "BOOKED", "SOLD", "BLOCKED"] as const);
+              : pick([
+                  "AVAILABLE",
+                  "AVAILABLE",
+                  "AVAILABLE",
+                  "HOLD",
+                  "BOOKED",
+                  "SOLD",
+                  "BLOCKED",
+                ] as const);
           units.push({
             id: `unt_${units.length + 1}`,
             ...stamp(-450 + pi * 25),
@@ -189,15 +245,22 @@ export function buildSeed(): Database {
     ...stamp(-380 + i * 8),
     code: `CP-${(1001 + i).toString()}`,
     company: [
-      "Anmol Realty Advisors","Prime Space Consultants","Nova Property Hub","Skyward Realtors",
-      "Aashray Homes LLP","Metro Key Realty","Vastu Sales Partners","Elite Nest Realty",
-      "Shubh Realty Network","Cityscape Associates",
-    ][i],
+      "Anmol Realty Advisors",
+      "Prime Space Consultants",
+      "Nova Property Hub",
+      "Skyward Realtors",
+      "Aashray Homes LLP",
+      "Metro Key Realty",
+      "Vastu Sales Partners",
+      "Elite Nest Realty",
+      "Shubh Realty Network",
+      "Cityscape Associates",
+    ][i]!,
     contactPerson: `${pick(FIRST)} ${pick(LAST)}`,
     phone: `+91 9${int(100000000, 899999999)}`,
     email: `partner${i + 1}@channel.in`,
     reraNumber: `A${int(50000, 59999)}${int(100, 999)}`,
-    commissionPct: [1.5, 2, 2.5, 3][int(0, 3)],
+    commissionPct: [1.5, 2, 2.5, 3][int(0, 3)]!,
     city: pick(CITIES),
     active: i !== 9,
   }));
@@ -221,7 +284,15 @@ export function buildSeed(): Database {
   });
 
   const leadStatuses: LeadStatus[] = [
-    "NEW","NEW","CONTACTED","CONTACTED","SITE_VISIT","QUALIFIED","NEGOTIATION","CONVERTED","LOST",
+    "NEW",
+    "NEW",
+    "CONTACTED",
+    "CONTACTED",
+    "SITE_VISIT",
+    "QUALIFIED",
+    "NEGOTIATION",
+    "CONVERTED",
+    "LOST",
   ];
   const leads: Lead[] = Array.from({ length: 58 }, (_, i) => {
     const name = `${FIRST[(i * 7) % FIRST.length]} ${LAST[(i * 5) % LAST.length]}`;
@@ -235,7 +306,7 @@ export function buildSeed(): Database {
       email: `${name.toLowerCase().replace(/\s+/g, ".")}@gmail.com`,
       source,
       projectId: pick(projects).id,
-      budget: [5000000, 7500000, 9000000, 12000000, 15000000, 18000000][int(0, 5)],
+      budget: [5000000, 7500000, 9000000, 12000000, 15000000, 18000000][int(0, 5)]!,
       status: pick(leadStatuses),
       assignedToId: pick(salesUsers).id,
       channelPartnerId: source === "CHANNEL_PARTNER" ? pick(channelPartners).id : null,
@@ -245,7 +316,7 @@ export function buildSeed(): Database {
     };
   });
   leads.slice(0, 24).forEach((l, i) => {
-    if (l.status === "CONVERTED") customers[i].leadId = l.id;
+    if (l.status === "CONVERTED") customers[i]!.leadId = l.id;
   });
 
   const followUps: FollowUp[] = Array.from({ length: 34 }, (_, i) => {
@@ -280,11 +351,18 @@ export function buildSeed(): Database {
       code: `SV-${5001 + i}`,
       leadId: lead.id,
       customerId: null,
-      projectId: lead.projectId ?? projects[0].id,
+      projectId: lead.projectId ?? projects[0]!.id,
       visitAt: iso(int(-20, 12), int(10, 18), pick([0, 30])),
       assignedToId: lead.assignedToId,
       visitors: int(1, 4),
-      status: pick(["SCHEDULED", "SCHEDULED", "COMPLETED", "COMPLETED", "NO_SHOW", "CANCELLED"] as const),
+      status: pick([
+        "SCHEDULED",
+        "SCHEDULED",
+        "COMPLETED",
+        "COMPLETED",
+        "NO_SHOW",
+        "CANCELLED",
+      ] as const),
       notes: "",
     };
   });
@@ -297,18 +375,60 @@ export function buildSeed(): Database {
     projectId,
     description: `${name} milestone schedule`,
     milestones: [
-      { id: uid("ms"), name: "Booking Amount", percentage: 10, dueType: "BOOKING", dueDate: null, constructionMilestone: null },
-      { id: uid("ms"), name: "Agreement", percentage: 20, dueType: "DATE", dueDate: iso(30), constructionMilestone: null },
-      { id: uid("ms"), name: "Foundation", percentage: 10, dueType: "CONSTRUCTION", dueDate: null, constructionMilestone: "Foundation" },
-      { id: uid("ms"), name: "Slab Casting", percentage: 15, dueType: "CONSTRUCTION", dueDate: null, constructionMilestone: "Structure" },
-      { id: uid("ms"), name: "Brickwork", percentage: 15, dueType: "CONSTRUCTION", dueDate: null, constructionMilestone: "Brickwork" },
-      { id: uid("ms"), name: "Possession", percentage: 30, dueType: "CONSTRUCTION", dueDate: null, constructionMilestone: "Possession" },
+      {
+        id: uid("ms"),
+        name: "Booking Amount",
+        percentage: 10,
+        dueType: "BOOKING",
+        dueDate: null,
+        constructionMilestone: null,
+      },
+      {
+        id: uid("ms"),
+        name: "Agreement",
+        percentage: 20,
+        dueType: "DATE",
+        dueDate: iso(30),
+        constructionMilestone: null,
+      },
+      {
+        id: uid("ms"),
+        name: "Foundation",
+        percentage: 10,
+        dueType: "CONSTRUCTION",
+        dueDate: null,
+        constructionMilestone: "Foundation",
+      },
+      {
+        id: uid("ms"),
+        name: "Slab Casting",
+        percentage: 15,
+        dueType: "CONSTRUCTION",
+        dueDate: null,
+        constructionMilestone: "Structure",
+      },
+      {
+        id: uid("ms"),
+        name: "Brickwork",
+        percentage: 15,
+        dueType: "CONSTRUCTION",
+        dueDate: null,
+        constructionMilestone: "Brickwork",
+      },
+      {
+        id: uid("ms"),
+        name: "Possession",
+        percentage: 30,
+        dueType: "CONSTRUCTION",
+        dueDate: null,
+        constructionMilestone: "Possession",
+      },
     ],
   });
   const paymentPlans: PaymentPlan[] = [
     planFor("Construction Linked Plan", null, 1),
-    planFor("Down Payment Plan", projects[0].id, 2),
-    planFor("Flexi Payment Plan", projects[1].id, 3),
+    planFor("Down Payment Plan", projects[0]!.id, 2),
+    planFor("Flexi Payment Plan", projects[1]!.id, 3),
   ];
 
   const bookings: Booking[] = [];
@@ -317,9 +437,11 @@ export function buildSeed(): Database {
   const payments: Payment[] = [];
   const commissions: Commission[] = [];
 
-  const soldOrBooked = units.filter((u) => u.status === "BOOKED" || u.status === "SOLD").slice(0, 22);
+  const soldOrBooked = units
+    .filter((u) => u.status === "BOOKED" || u.status === "SOLD")
+    .slice(0, 22);
   soldOrBooked.forEach((unit, i) => {
-    const customer = customers[i % customers.length];
+    const customer = customers[i % customers.length]!;
     const agreementValue = Math.round(
       (unit.basePrice + unit.plc + unit.parking + unit.floorRise + unit.otherCharges) * 1.05,
     );
@@ -339,7 +461,7 @@ export function buildSeed(): Database {
       status: unit.status === "SOLD" ? "COMPLETED" : i % 7 === 0 ? "PENDING" : "CONFIRMED",
       salespersonId: pick(salesUsers).id,
       channelPartnerId: cp?.id ?? null,
-      paymentPlanId: paymentPlans[i % paymentPlans.length].id,
+      paymentPlanId: paymentPlans[i % paymentPlans.length]!.id,
       notes: "",
     };
     bookings.push(booking);
@@ -371,7 +493,7 @@ export function buildSeed(): Database {
       });
     }
 
-    const plan = paymentPlans[i % paymentPlans.length];
+    const plan = paymentPlans[i % paymentPlans.length]!;
     let offset = -190 + i * 8;
     plan.milestones.slice(0, int(2, 5)).forEach((ms, mi) => {
       offset += int(20, 45);
@@ -395,7 +517,8 @@ export function buildSeed(): Database {
 
       const total = Math.round(amount * 1.05);
       const roll = rand();
-      const paidAmount = mi === 0 || roll < 0.55 ? total : roll < 0.75 ? Math.round(total * 0.4) : 0;
+      const paidAmount =
+        mi === 0 || roll < 0.55 ? total : roll < 0.75 ? Math.round(total * 0.4) : 0;
       if (paidAmount > 0) {
         payments.push({
           id: `pay_${payments.length + 1}`,
@@ -420,14 +543,27 @@ export function buildSeed(): Database {
     .filter((u) => u.status === "HOLD")
     .slice(0, 12)
     .forEach((u, i) => {
-      u.holdCustomerId = customers[i % customers.length].id;
+      u.holdCustomerId = customers[i % customers.length]!.id;
       u.holdSalespersonId = pick(salesUsers).id;
       u.holdUntil = iso(int(0, 3), int(10, 20));
-      u.holdReason = pick(["Awaiting token cheque", "Loan approval in progress", "Family confirmation pending"]);
+      u.holdReason = pick([
+        "Awaiting token cheque",
+        "Loan approval in progress",
+        "Family confirmation pending",
+      ]);
     });
 
   const MILESTONE_NAMES = [
-    "Land","Foundation","Plinth","Structure","Brickwork","Plaster","Electrical","Finishing","Amenities","Possession",
+    "Land",
+    "Foundation",
+    "Plinth",
+    "Structure",
+    "Brickwork",
+    "Plaster",
+    "Electrical",
+    "Finishing",
+    "Amenities",
+    "Possession",
   ];
   const constructionMilestones: ConstructionMilestone[] = [];
   projects.forEach((project, pi) => {
@@ -435,7 +571,13 @@ export function buildSeed(): Database {
       const cutoff = pi === 3 ? 1 : pi === 2 ? 4 : 6 - pi;
       const progress = mi < cutoff ? 100 : mi === cutoff ? int(20, 80) : 0;
       const status: ConstructionMilestone["status"] =
-        progress === 100 ? "COMPLETED" : progress === 0 ? "NOT_STARTED" : pi === 2 ? "DELAYED" : "IN_PROGRESS";
+        progress === 100
+          ? "COMPLETED"
+          : progress === 0
+            ? "NOT_STARTED"
+            : pi === 2
+              ? "DELAYED"
+              : "IN_PROGRESS";
       constructionMilestones.push({
         id: `cms_${constructionMilestones.length + 1}`,
         ...stamp(-400 + mi * 20),
@@ -480,7 +622,9 @@ export function buildSeed(): Database {
     pushDoc(`${b.code} - Booking Form.pdf`, "BOOKING_FORM", "BOOKING", b.id, -90 + i);
     pushDoc(`${b.code} - Agreement.pdf`, "AGREEMENT", "BOOKING", b.id, -80 + i);
   });
-  projects.forEach((p, i) => pushDoc(`${p.name} - RERA Certificate.pdf`, "OTHER", "PROJECT", p.id, -300 + i));
+  projects.forEach((p, i) =>
+    pushDoc(`${p.name} - RERA Certificate.pdf`, "OTHER", "PROJECT", p.id, -300 + i),
+  );
 
   const activities: Activity[] = [];
   const addActivity = (a: Omit<Activity, "id">) =>
@@ -504,7 +648,7 @@ export function buildSeed(): Database {
       at: p.paymentDate,
       title: "Payment received",
       description: `Payment of ₹${new Intl.NumberFormat("en-IN").format(p.amount)} received via ${p.mode}`,
-      actorId: users[4].id,
+      actorId: users[4]!.id,
     });
   });
   leads.slice(0, 30).forEach((l) => {

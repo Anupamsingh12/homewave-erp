@@ -95,7 +95,7 @@ export const analyticsService = {
         if (s.status !== "OVERDUE" || s.outstanding <= 0) continue;
         const days = Math.floor((now.getTime() - new Date(inv.dueDate).getTime()) / 86_400_000);
         const bucket = days <= 30 ? "0-30" : days <= 60 ? "31-60" : days <= 90 ? "61-90" : "90+";
-        aging[bucket] += s.outstanding;
+        aging[bucket] = (aging[bucket] ?? 0) + s.outstanding;
       }
 
       const upcoming = [
@@ -104,7 +104,12 @@ export const analyticsService = {
           .map((f) => ({ id: f.id, title: f.title, due: f.dueAt, kind: "Follow-up" })),
         ...db.siteVisits
           .filter((v) => v.status === "SCHEDULED")
-          .map((v) => ({ id: v.id, title: `Site visit ${v.code}`, due: v.visitAt, kind: "Site visit" })),
+          .map((v) => ({
+            id: v.id,
+            title: `Site visit ${v.code}`,
+            due: v.visitAt,
+            kind: "Site visit",
+          })),
       ]
         .sort((a, b) => a.due.localeCompare(b.due))
         .slice(0, 6);

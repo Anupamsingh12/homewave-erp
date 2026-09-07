@@ -52,6 +52,14 @@ export interface BookingFinance {
   overdue: number;
 }
 
+/** Collection status for a booking, matching the spec's Payment color table (PAID/PARTIAL/PENDING/OVERDUE). */
+export function paymentStatusOf(f: BookingFinance): "PAID" | "PARTIAL" | "PENDING" | "OVERDUE" {
+  if (f.overdue > 0) return "OVERDUE";
+  if (f.demanded > 0 && f.due <= 0) return "PAID";
+  if (f.paid > 0) return "PARTIAL";
+  return "PENDING";
+}
+
 export function bookingFinance(bookingId: string): BookingFinance {
   const db = getDb();
   const booking = db.bookings.find((b) => b.id === bookingId);

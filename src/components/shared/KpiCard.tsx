@@ -53,7 +53,12 @@ export function KpiCard({
           </div>
         </div>
         {Icon && (
-          <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-lg", accentClass)}>
+          <div
+            className={cn(
+              "flex size-9 shrink-0 items-center justify-center rounded-lg",
+              accentClass,
+            )}
+          >
             <Icon className="size-4.5" />
           </div>
         )}

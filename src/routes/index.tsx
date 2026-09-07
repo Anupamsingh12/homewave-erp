@@ -1,24 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PageHeader } from "@/components/shared/PageHeader";
+import { Skeleton } from "@/components/ui/skeleton";
+import { KpiRow } from "@/components/dashboard/KpiRow";
+import { LeadFunnelChart } from "@/components/dashboard/LeadFunnelChart";
+import { SalesTrendChart } from "@/components/dashboard/SalesTrendChart";
+import { InventoryBreakdown } from "@/components/dashboard/InventoryBreakdown";
+import { ProjectPerformanceTable } from "@/components/dashboard/ProjectPerformanceTable";
+import { RecentActivityFeed } from "@/components/dashboard/RecentActivityFeed";
+import { QuickActions } from "@/components/dashboard/QuickActions";
+import { useData } from "@/hooks/use-erp";
+import { activityService, analyticsService, siteVisitService } from "@/services";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Dashboard,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Dashboard() {
+  const { data: snapshot, isLoading } = useData(["dashboard"], analyticsService.dashboard);
+  const { data: activities } = useData(["activities", "recent"], () => activityService.recent(8));
+  const { data: siteVisits } = useData(["siteVisits", "all"], siteVisitService.all);
+
+  const siteVisitsScheduled = (siteVisits ?? []).filter((v) => v.status === "SCHEDULED").length;
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <div className="space-y-6">
+      <PageHeader
+        title="Dashboard"
+        description="Your builder ERP at a glance — pipeline, inventory, and cash flow."
       />
+      <QuickActions />
+
+      {isLoading || !snapshot ? (
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Skeleton key={i} className="h-24 w-full" />
+          ))}
+        </div>
+      ) : (
+        <>
+          <KpiRow snapshot={snapshot} siteVisitsScheduled={siteVisitsScheduled} />
+
+          <div className="grid gap-6 xl:grid-cols-2">
+            <SalesTrendChart data={snapshot.salesTrend} />
+            <LeadFunnelChart data={snapshot.leadFunnel} />
+          </div>
+
+          <InventoryBreakdown inventory={snapshot.inventory} />
+          <ProjectPerformanceTable rows={snapshot.projectPerformance} />
+          <RecentActivityFeed items={activities ?? []} />
+        </>
+      )}
     </div>
   );
 }

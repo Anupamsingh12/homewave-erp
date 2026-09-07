@@ -32,12 +32,14 @@ export function createCrudService<K extends keyof Database>(
 
   return {
     list(query) {
-      return request(`/${String(key)}`, () =>
-        applyQuery(
-          rows() as unknown as Record<string, unknown>[],
-          query,
-          options.searchFields as string[],
-        ) as unknown as ListResult<Row<K>>,
+      return request(
+        `/${String(key)}`,
+        () =>
+          applyQuery(
+            rows() as unknown as Record<string, unknown>[],
+            query,
+            options.searchFields as string[],
+          ) as unknown as ListResult<Row<K>>,
       );
     },
     all() {
@@ -89,7 +91,7 @@ export function createCrudService<K extends keyof Database>(
         const list = rows();
         const idx = list.findIndex((r) => (r as { id: string }).id === id);
         if (idx === -1) throw new ApiError("Record not found", 404);
-        const blocked = options.guardDelete?.(list[idx], db);
+        const blocked = options.guardDelete?.(list[idx]!, db);
         if (blocked) throw new ApiError(blocked, 409);
         list.splice(idx, 1);
       });
@@ -111,6 +113,6 @@ export function logActivity(
     at: nowIso(),
     title,
     description,
-    actorId: db.users[0].id,
+    actorId: db.users[0]!.id,
   });
 }

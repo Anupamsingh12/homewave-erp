@@ -39,37 +39,36 @@ Reporting & Analytics
 The application revolves around this lifecycle:
 
 LEAD
-  ↓
+↓
 FOLLOW-UP
-  ↓
+↓
 SITE VISIT
-  ↓
+↓
 OPPORTUNITY
-  ↓
+↓
 PROJECT
-  ↓
+↓
 TOWER / BLOCK
-  ↓
+↓
 FLOOR
-  ↓
+↓
 UNIT / FLAT
-  ↓
+↓
 HOLD
-  ↓
+↓
 BOOKING
-  ↓
+↓
 AGREEMENT
-  ↓
+↓
 PAYMENT PLAN
-  ↓
+↓
 DEMAND / INVOICE
-  ↓
+↓
 PAYMENT
-  ↓
+↓
 RECEIPT
-  ↓
+↓
 POSSESSION
-
 
 The system should make this lifecycle visible throughout the application.
 
@@ -140,39 +139,38 @@ Use a service/repository layer.
 Recommended structure:
 
 src/
-  components/
-  pages/
-  layouts/
-  services/
-    api/
-      client.ts
-    leads.service.ts
-    customers.service.ts
-    projects.service.ts
-    towers.service.ts
-    units.service.ts
-    bookings.service.ts
-    payments.service.ts
-    invoices.service.ts
-    payment-plans.service.ts
-    site-visits.service.ts
-    channel-partners.service.ts
-    construction.service.ts
-    documents.service.ts
-    dashboard.service.ts
-  mocks/
-    leads.mock.ts
-    customers.mock.ts
-    projects.mock.ts
-    units.mock.ts
-    bookings.mock.ts
-    payments.mock.ts
-    invoices.mock.ts
-    ...
-  types/
-  hooks/
-  utils/
-
+components/
+pages/
+layouts/
+services/
+api/
+client.ts
+leads.service.ts
+customers.service.ts
+projects.service.ts
+towers.service.ts
+units.service.ts
+bookings.service.ts
+payments.service.ts
+invoices.service.ts
+payment-plans.service.ts
+site-visits.service.ts
+channel-partners.service.ts
+construction.service.ts
+documents.service.ts
+dashboard.service.ts
+mocks/
+leads.mock.ts
+customers.mock.ts
+projects.mock.ts
+units.mock.ts
+bookings.mock.ts
+payments.mock.ts
+invoices.mock.ts
+...
+types/
+hooks/
+utils/
 
 All UI screens should call services such as:
 
@@ -182,11 +180,9 @@ leadService.create(data)
 leadService.update(id, data)
 leadService.delete(id)
 
-
 Instead of:
 
 mockLeads.map(...)
-
 
 inside components.
 
@@ -196,7 +192,6 @@ Create a central API client:
 
 apiClient
 
-
 The services should initially use mock implementations.
 
 Structure them so they can later be switched to REST APIs.
@@ -204,13 +199,12 @@ Structure them so they can later be switched to REST APIs.
 Example:
 
 export const leadService = {
-  async list(filters) {},
-  async getById(id) {},
-  async create(data) {},
-  async update(id, data) {},
-  async delete(id) {},
+async list(filters) {},
+async getById(id) {},
+async create(data) {},
+async update(id, data) {},
+async delete(id) {},
 };
-
 
 Later this should be easy to replace with:
 
@@ -219,7 +213,6 @@ GET /api/v1/leads/:id
 POST /api/v1/leads
 PUT /api/v1/leads/:id
 DELETE /api/v1/leads/:id
-
 
 Do not require UI changes when the backend API is introduced.
 
@@ -260,42 +253,41 @@ Create a premium SaaS layout.
 Desktop
 
 ┌─────────────────────────────────────────────────────────────┐
-│ Logo          Search...          Notifications   Admin      │
+│ Logo Search... Notifications Admin │
 ├───────────────┬─────────────────────────────────────────────┤
-│               │                                             │
-│ Dashboard     │                                             │
-│               │                                             │
-│ CRM           │               MAIN CONTENT                  │
-│  Leads        │                                             │
-│  Site Visits  │                                             │
-│  Follow-ups   │                                             │
-│               │                                             │
-│ Sales         │                                             │
-│  Opportunities│                                             │
-│  Bookings     │                                             │
-│  Agreements   │                                             │
-│               │                                             │
-│ Projects      │                                             │
-│  Projects     │                                             │
-│  Inventory    │                                             │
-│  Towers       │                                             │
-│  Units        │                                             │
-│               │                                             │
-│ Finance       │                                             │
-│  Payment Plans│                                             │
-│  Invoices     │                                             │
-│  Payments     │                                             │
-│  Outstanding  │                                             │
-│               │                                             │
-│ Operations    │                                             │
-│  Construction │                                             │
-│  Channel      │                                             │
-│  Documents    │                                             │
-│               │                                             │
-│ Reports       │                                             │
-│ Settings      │                                             │
+│ │ │
+│ Dashboard │ │
+│ │ │
+│ CRM │ MAIN CONTENT │
+│ Leads │ │
+│ Site Visits │ │
+│ Follow-ups │ │
+│ │ │
+│ Sales │ │
+│ Opportunities│ │
+│ Bookings │ │
+│ Agreements │ │
+│ │ │
+│ Projects │ │
+│ Projects │ │
+│ Inventory │ │
+│ Towers │ │
+│ Units │ │
+│ │ │
+│ Finance │ │
+│ Payment Plans│ │
+│ Invoices │ │
+│ Payments │ │
+│ Outstanding │ │
+│ │ │
+│ Operations │ │
+│ Construction │ │
+│ Channel │ │
+│ Documents │ │
+│ │ │
+│ Reports │ │
+│ Settings │ │
 └───────────────┴─────────────────────────────────────────────┘
-
 
 On mobile:
 
@@ -349,22 +341,19 @@ Primary brand:
 
 Deep Navy / Slate
 
-
 Secondary:
 
 Warm Gold / Amber
-
 
 Use gold sparingly for premium/high-value highlights.
 
 Semantic colors:
 
-Success     → Green
-Warning     → Amber
-Danger      → Red
-Info        → Blue
-Neutral     → Slate/Gray
-
+Success → Green
+Warning → Amber
+Danger → Red
+Info → Blue
+Neutral → Slate/Gray
 
 IMPORTANT:
 
@@ -376,56 +365,50 @@ Use the same status color everywhere.
 
 Lead
 
-NEW             → Blue
-CONTACTED       → Purple
-SITE_VISIT      → Amber
-QUALIFIED       → Cyan
-NEGOTIATION     → Orange
-CONVERTED       → Green
-LOST            → Red
-
+NEW → Blue
+CONTACTED → Purple
+SITE_VISIT → Amber
+QUALIFIED → Cyan
+NEGOTIATION → Orange
+CONVERTED → Green
+LOST → Red
 
 Unit
 
-AVAILABLE       → Green
-HOLD            → Amber
-BOOKED          → Blue
-SOLD            → Purple
-BLOCKED         → Red
-
+AVAILABLE → Green
+HOLD → Amber
+BOOKED → Blue
+SOLD → Purple
+BLOCKED → Red
 
 Booking
 
-PENDING         → Amber
-CONFIRMED       → Blue
-CANCELLED       → Red
-COMPLETED       → Green
-
+PENDING → Amber
+CONFIRMED → Blue
+CANCELLED → Red
+COMPLETED → Green
 
 Payment
 
-PAID            → Green
-PARTIAL         → Amber
-PENDING         → Blue
-OVERDUE         → Red
-FAILED          → Red
-
+PAID → Green
+PARTIAL → Amber
+PENDING → Blue
+OVERDUE → Red
+FAILED → Red
 
 Project
 
-PLANNING        → Slate
-ACTIVE          → Blue
-ON_TRACK        → Green
-DELAYED         → Amber
-COMPLETED       → Green
-
+PLANNING → Slate
+ACTIVE → Blue
+ON_TRACK → Green
+DELAYED → Amber
+COMPLETED → Green
 
 Create reusable:
 
 StatusBadge
 StatusDot
 StatusTimeline
-
 
 components.
 
@@ -444,30 +427,27 @@ Collections This Month
 Outstanding Amount
 Available Units
 
-
 Example:
 
 ₹12.8 Cr
 Sales This Month
 ↑ 18.4%
 
-
 Charts:
 
 Lead Funnel
 
 Leads
- ↓
+↓
 Contacted
- ↓
+↓
 Qualified
- ↓
+↓
 Site Visit
- ↓
+↓
 Negotiation
- ↓
+↓
 Booking
-
 
 Sales Trend
 
@@ -484,7 +464,6 @@ Hold
 Booked
 Sold
 
-
 Project Performance
 
 Show:
@@ -496,7 +475,6 @@ Available
 Sales Value
 Collected
 Outstanding
-
 
 Recent Activities
 
@@ -510,7 +488,6 @@ Priya Sharma payment received ₹5,00,000
 
 Amit requested site visit
 42 minutes ago
-
 
 11. GLOBAL SEARCH
 
@@ -527,7 +504,6 @@ Invoices
 Payments
 Channel Partners
 
-
 Example:
 
 Search "A-1204"
@@ -538,7 +514,6 @@ Customer Rajesh Kumar
 Booking #BK-10234
 Invoice #INV-2024
 
-
 12. CRM MODULE
 
 Leads
@@ -546,7 +521,6 @@ Leads
 Route:
 
 /crm/leads
-
 
 Table columns:
 
@@ -563,7 +537,6 @@ Next Follow-up
 Created
 Actions
 
-
 Filters:
 
 Status
@@ -573,14 +546,12 @@ Assigned To
 Budget
 Date
 
-
 Search:
 
 Name
 Phone
 Email
 Lead ID
-
 
 Actions:
 
@@ -592,7 +563,6 @@ Schedule Follow-up
 Schedule Site Visit
 Convert to Customer
 
-
 13. LEAD DETAIL PAGE
 
 Create a rich CRM detail page.
@@ -602,7 +572,6 @@ Header:
 Rajesh Kumar
 Qualified
 ₹1.2 Cr Budget
-
 
 Sections:
 
@@ -616,7 +585,6 @@ Notes
 Documents
 Activity Timeline
 
-
 Activity timeline:
 
 Today
@@ -627,7 +595,6 @@ Today
 │
 └── Brochure sent
 
-
 Actions:
 
 Call
@@ -636,7 +603,6 @@ Email
 Schedule Visit
 Add Follow-up
 Convert
-
 
 14. FOLLOW-UPS
 
@@ -649,7 +615,6 @@ Upcoming
 Overdue
 Completed
 
-
 Each follow-up:
 
 Customer
@@ -658,7 +623,6 @@ Due Date
 Assigned User
 Priority
 Status
-
 
 Provide:
 
@@ -687,14 +651,12 @@ Visitors
 Status
 Notes
 
-
 Statuses:
 
 SCHEDULED
 COMPLETED
 NO_SHOW
 CANCELLED
-
 
 Calendar-style UI is preferred.
 
@@ -703,7 +665,6 @@ Calendar-style UI is preferred.
 Route:
 
 /customers
-
 
 Fields:
 
@@ -720,7 +681,6 @@ Units
 Booking Value
 Outstanding
 
-
 Customer detail should show:
 
 Profile
@@ -734,13 +694,11 @@ Documents
 Communication
 Activity Timeline
 
-
 17. PROJECT MANAGEMENT
 
 Route:
 
 /projects
-
 
 Project cards/table.
 
@@ -759,7 +717,6 @@ Available
 Booked
 Sold
 
-
 Actions:
 
 Create
@@ -767,7 +724,6 @@ Edit
 Delete
 View
 Archive
-
 
 18. PROJECT DETAIL
 
@@ -779,7 +735,6 @@ Green Heights
 Mumbai
 RERA: PXXXXXX
 ACTIVE
-
 
 Tabs:
 
@@ -793,7 +748,6 @@ Customers
 Documents
 Reports
 
-
 Overview:
 
 Total Units
@@ -804,7 +758,6 @@ Sold
 Sales Value
 Collected
 Outstanding
-
 
 19. TOWERS / BUILDINGS
 
@@ -821,7 +774,6 @@ Booked Units
 Sold Units
 Status
 
-
 CRUD fully working.
 
 20. FLOORS
@@ -836,7 +788,6 @@ Available
 Booked
 Sold
 
-
 21. UNIT / FLAT INVENTORY
 
 This is one of the most important screens.
@@ -850,15 +801,14 @@ TOWER A
 Floor 12
 ┌────────┬────────┬────────┬────────┐
 │ A-1201 │ A-1202 │ A-1203 │ A-1204 │
-│ Green  │ Blue   │ Green  │ Purple │
+│ Green │ Blue │ Green │ Purple │
 └────────┴────────┴────────┴────────┘
 
 Floor 11
 ┌────────┬────────┬────────┬────────┐
 │ A-1101 │ A-1102 │ A-1103 │ A-1104 │
-│ Green  │ Red    │ Green  │ Amber  │
+│ Green │ Red │ Green │ Amber │
 └────────┴────────┴────────┴────────┘
-
 
 Color indicates unit status.
 
@@ -869,7 +819,6 @@ HOLD
 BOOKED
 SOLD
 BLOCKED
-
 
 Clicking a unit opens its detail.
 
@@ -883,7 +832,6 @@ A-1204
 Tower A
 12th Floor
 
-
 Pricing:
 
 Base Price
@@ -893,7 +841,6 @@ Floor Rise
 Other Charges
 GST
 Total Agreement Value
-
 
 Status.
 
@@ -911,7 +858,6 @@ Book Unit
 Edit
 Block
 
-
 23. UNIT HOLD
 
 Allow sales staff to hold a unit.
@@ -924,14 +870,12 @@ Hold Date
 Expiry Date
 Reason
 
-
 Show countdown where appropriate.
 
 Example:
 
 HOLD
 Expires in 4h 32m
-
 
 Expired holds should automatically return to available status in mock/business logic.
 
@@ -940,7 +884,6 @@ Expired holds should automatically return to available status in mock/business l
 Route:
 
 /sales/bookings
-
 
 Table:
 
@@ -956,7 +899,6 @@ Payment Status
 Booking Status
 Salesperson
 
-
 Filters:
 
 Project
@@ -965,7 +907,6 @@ Status
 Payment Status
 Salesperson
 Date
-
 
 25. BOOKING DETAIL
 
@@ -980,7 +921,6 @@ Rajesh Kumar
 Green Heights
 Tower A / A-1204
 
-
 Sections:
 
 Booking Information
@@ -993,14 +933,12 @@ Payments
 Documents
 Activity
 
-
 Show financial summary:
 
-Agreement Value     ₹1,25,00,000
-Paid                ₹35,00,000
-Due                 ₹90,00,000
-Overdue             ₹10,00,000
-
+Agreement Value ₹1,25,00,000
+Paid ₹35,00,000
+Due ₹90,00,000
+Overdue ₹10,00,000
 
 26. AGREEMENTS
 
@@ -1017,7 +955,6 @@ Agreement Value
 Status
 Document
 
-
 Statuses:
 
 DRAFT
@@ -1025,7 +962,6 @@ GENERATED
 SENT
 SIGNED
 CANCELLED
-
 
 Allow:
 
@@ -1050,13 +986,12 @@ Example:
 Payment Plan
 Construction Linked Plan
 
-Booking             ₹5,00,000
-Agreement            ₹20,00,000
-Foundation           ₹10,00,000
-Slab                 ₹15,00,000
-Brickwork            ₹15,00,000
-Possession           ₹60,00,000
-
+Booking ₹5,00,000
+Agreement ₹20,00,000
+Foundation ₹10,00,000
+Slab ₹15,00,000
+Brickwork ₹15,00,000
+Possession ₹60,00,000
 
 Each milestone:
 
@@ -1067,7 +1002,6 @@ Due Type
 Due Date
 Construction Milestone
 
-
 Support:
 
 Fixed Amount
@@ -1075,13 +1009,11 @@ Percentage
 Date Based
 Construction Milestone Based
 
-
 28. INVOICES / DEMANDS
 
 Route:
 
 /finance/invoices
-
 
 Create invoices/demand letters.
 
@@ -1101,7 +1033,6 @@ Paid
 Outstanding
 Status
 
-
 Statuses:
 
 DRAFT
@@ -1110,7 +1041,6 @@ PARTIALLY_PAID
 PAID
 OVERDUE
 CANCELLED
-
 
 Invoice detail:
 
@@ -1124,7 +1054,6 @@ Payments
 Outstanding
 Documents
 
-
 Actions:
 
 Create
@@ -1135,13 +1064,11 @@ Download
 Cancel
 Delete Draft
 
-
 29. PAYMENTS
 
 Route:
 
 /finance/payments
-
 
 Fields:
 
@@ -1155,7 +1082,6 @@ Payment Mode
 Reference Number
 Status
 
-
 Payment modes:
 
 BANK_TRANSFER
@@ -1167,23 +1093,21 @@ NEFT
 RTGS
 OTHER
 
-
 Record payment workflow:
 
 Invoice
- ↓
+↓
 Record Payment
- ↓
+↓
 Amount
- ↓
+↓
 Payment Method
- ↓
+↓
 Reference
- ↓
+↓
 Confirm
- ↓
+↓
 Receipt Generated
-
 
 30. CUSTOMER LEDGER
 
@@ -1191,12 +1115,11 @@ Each customer should have a financial ledger.
 
 Example:
 
-Date       Description          Debit       Credit      Balance
+Date Description Debit Credit Balance
 
-01 Sep     Booking              ₹5,00,000
-15 Sep     Agreement Demand     ₹20,00,000
-20 Sep     Payment                         ₹10,00,000
-
+01 Sep Booking ₹5,00,000
+15 Sep Agreement Demand ₹20,00,000
+20 Sep Payment ₹10,00,000
 
 Show:
 
@@ -1205,7 +1128,6 @@ Total Demanded
 Total Paid
 Total Outstanding
 Overdue
-
 
 31. COLLECTIONS DASHBOARD
 
@@ -1218,13 +1140,11 @@ Overdue
 Due This Week
 Due This Month
 
-
 Charts:
 
 Collection Trend
 Outstanding by Project
 Overdue Aging
-
 
 Aging:
 
@@ -1233,13 +1153,11 @@ Aging:
 61–90 days
 90+ days
 
-
 32. CHANNEL PARTNERS / BROKERS
 
 Create:
 
 Channel Partners
-
 
 Fields:
 
@@ -1251,7 +1169,6 @@ RERA Number
 Commission %
 Status
 
-
 Manage:
 
 Leads
@@ -1259,7 +1176,6 @@ Site Visits
 Bookings
 Commission
 Payouts
-
 
 Broker detail:
 
@@ -1270,7 +1186,6 @@ Sales Value
 Commission Earned
 Commission Paid
 Outstanding Commission
-
 
 33. COMMISSION MANAGEMENT
 
@@ -1287,7 +1202,6 @@ Booking
 Eligibility
 Payout Status
 
-
 Statuses:
 
 PENDING
@@ -1295,7 +1209,6 @@ ELIGIBLE
 APPROVED
 PAID
 CANCELLED
-
 
 34. CONSTRUCTION MODULE
 
@@ -1316,7 +1229,6 @@ Finishing
 Amenities
 Possession
 
-
 Each milestone:
 
 Name
@@ -1327,7 +1239,6 @@ Progress %
 Status
 Notes
 
-
 Statuses:
 
 NOT_STARTED
@@ -1335,7 +1246,6 @@ IN_PROGRESS
 ON_TRACK
 DELAYED
 COMPLETED
-
 
 35. CONSTRUCTION DASHBOARD
 
@@ -1346,16 +1256,14 @@ Current Milestone
 Delayed Milestones
 Upcoming Milestones
 
-
 Visual progress timeline.
 
 Example:
 
-Foundation       ██████████ 100%
-Structure        ████████░░ 80%
-Brickwork        █████░░░░░ 50%
-Plaster          ██░░░░░░░░ 20%
-
+Foundation ██████████ 100%
+Structure ████████░░ 80%
+Brickwork █████░░░░░ 50%
+Plaster ██░░░░░░░░ 20%
 
 36. DOCUMENT MANAGEMENT
 
@@ -1372,7 +1280,6 @@ Agreement
 Invoice
 Payment
 
-
 Document fields:
 
 Name
@@ -1381,7 +1288,6 @@ Entity
 Uploaded By
 Uploaded Date
 Status
-
 
 Document types:
 
@@ -1396,14 +1302,12 @@ PAYMENT_RECEIPT
 POSSESSION_LETTER
 OTHER
 
-
 Provide:
 
 Upload
 Preview
 Download
 Delete
-
 
 For demo mode, simulate upload using mock file metadata.
 
@@ -1420,14 +1324,12 @@ Sales by Tower
 Sales by Salesperson
 Sales by Month
 
-
 Inventory
 
 Available Units
 Booked Units
 Sold Units
 Inventory Value
-
 
 Collections
 
@@ -1436,7 +1338,6 @@ Outstanding
 Overdue
 Aging
 
-
 CRM
 
 Lead Sources
@@ -1444,14 +1345,12 @@ Conversion Rate
 Site Visit Conversion
 Salesperson Performance
 
-
 Channel Partners
 
 Leads
 Bookings
 Sales Value
 Commission
-
 
 Use charts and export buttons.
 
@@ -1467,7 +1366,6 @@ SALES_MANAGER
 SALES_EXECUTIVE
 ACCOUNTS
 PROJECT_MANAGER
-
 
 Role permissions should be represented in the UI.
 
@@ -1487,7 +1385,6 @@ Tax Settings
 Notification Settings
 Document Settings
 
-
 40. CRUD UX STANDARD
 
 Every CRUD page must follow the same pattern.
@@ -1498,7 +1395,6 @@ Title
 Description
 Primary CTA
 
-
 Toolbar:
 
 Search
@@ -1506,13 +1402,11 @@ Filters
 View Toggle
 Export
 
-
 Table:
 
 Data
 Status
 Actions
-
 
 Create/Edit:
 
@@ -1531,7 +1425,6 @@ Delete Project?
 This action cannot be undone.
 
 [Cancel] [Delete Project]
-
 
 41. FORMS
 
@@ -1572,7 +1465,6 @@ Amount → positive number
 Percentage → 0–100
 Date → valid date
 
-
 42. TABLE UX
 
 Tables should support:
@@ -1609,7 +1501,6 @@ Tabs
 Activity Timeline
 Related Records
 
-
 For example:
 
 Customer
@@ -1619,7 +1510,6 @@ Customer
 ├── Invoices
 ├── Documents
 └── Activity
-
 
 44. NOTIFICATIONS
 
@@ -1634,7 +1524,6 @@ Unit held
 Unit released
 Invoice issued
 
-
 Errors should be clear and actionable.
 
 45. EMPTY STATES
@@ -1648,7 +1537,6 @@ No leads found
 Start building your sales pipeline by adding your first lead.
 
 [Add Lead]
-
 
 Do not leave blank tables.
 
@@ -1680,7 +1568,6 @@ Something went wrong while fetching booking data.
 
 [Try Again]
 
-
 48. MOCK DATA
 
 Create realistic demo data.
@@ -1692,7 +1579,6 @@ Test Project
 ABC
 Lorem ipsum
 
-
 Use realistic Indian real-estate data.
 
 Example projects:
@@ -1702,7 +1588,6 @@ Palm Residency
 Skyline One
 Urban Vista
 
-
 Indian cities:
 
 Mumbai
@@ -1710,7 +1595,6 @@ Pune
 Bangalore
 Delhi NCR
 Hyderabad
-
 
 Customers should have realistic:
 
@@ -1720,13 +1604,11 @@ email addresses
 budgets
 PAN-like masked values
 
-
 Use realistic currency formatting:
 
 ₹1,25,00,000
 ₹75,00,000
 ₹12,50,000
-
 
 49. MOCK SERVICE BEHAVIOUR
 
@@ -1743,7 +1625,6 @@ getById()
 list()
 filter()
 search()
-
 
 Use a centralized mock store/repository.
 
@@ -1773,7 +1654,6 @@ Site Visits
 Follow-ups
 Documents
 
-
 50. BUSINESS LOGIC
 
 Implement realistic relationships.
@@ -1781,24 +1661,20 @@ Implement realistic relationships.
 Example:
 
 Project
-  ↓
+↓
 Tower
-  ↓
+↓
 Floor
-  ↓
+↓
 Unit
-
 
 A unit belongs to exactly one project/tower/floor.
 
 Booking:
 
-Customer
-+
-Project
-+
+Customer +
+Project +
 Unit
-
 
 A booked unit cannot be booked again.
 
@@ -1806,13 +1682,11 @@ When:
 
 Unit = BOOKED
 
-
 it must not appear as available for another booking.
 
 When a booking is cancelled:
 
 Unit → AVAILABLE
-
 
 unless another valid hold exists.
 
@@ -1826,13 +1700,11 @@ BOOKED → SOLD
 HOLD → AVAILABLE
 BOOKED → CANCELLED → AVAILABLE
 
-
 Prevent invalid transitions.
 
 Show clear errors:
 
 This unit is already booked.
-
 
 52. FINANCIAL BUSINESS RULES
 
@@ -1843,21 +1715,17 @@ Invoice Outstanding decreases
 Customer Outstanding decreases
 Booking Collection increases
 
-
 When invoice becomes fully paid:
 
 Status = PAID
-
 
 If partially paid:
 
 Status = PARTIALLY_PAID
 
-
 If due date passes with outstanding amount:
 
 Status = OVERDUE
-
 
 53. CURRENCY
 
@@ -1867,7 +1735,6 @@ Use:
 
 ₹
 
-
 and Indian number formatting.
 
 Examples:
@@ -1875,7 +1742,6 @@ Examples:
 ₹5,00,000
 ₹25,50,000
 ₹1,25,00,000
-
 
 54. DATE / TIME
 
@@ -1885,7 +1751,6 @@ Example:
 
 31 Aug 2026
 31 Aug 2026, 10:30 AM
-
 
 Use date-fns or equivalent utility.
 
@@ -1908,7 +1773,6 @@ Yesterday
 4:15 PM
 Agreement generated
 
-
 Use across:
 
 Lead
@@ -1919,20 +1783,18 @@ Unit
 Invoice
 Payment
 
-
 56. COMMAND / QUICK ACTIONS
 
 Add useful quick actions.
 
 Dashboard:
 
-+ Add Lead
-+ Add Customer
-+ Add Project
-+ New Booking
-+ Record Payment
-+ Create Invoice
-
+- Add Lead
+- Add Customer
+- Add Project
+- New Booking
+- Record Payment
+- Create Invoice
 
 Keyboard-friendly where possible.
 
@@ -1944,16 +1806,13 @@ Desktop:
 
 1440px+
 
-
 Tablet:
 
 768px–1439px
 
-
 Mobile:
 
 <768px
-
 
 Do not simply shrink desktop tables.
 
@@ -2002,99 +1861,96 @@ Create clean routes.
 Example:
 
 /
- /dashboard
+/dashboard
 
- /crm
- /crm/leads
- /crm/leads/:id
- /crm/follow-ups
- /crm/site-visits
+/crm
+/crm/leads
+/crm/leads/:id
+/crm/follow-ups
+/crm/site-visits
 
- /customers
- /customers/:id
+/customers
+/customers/:id
 
- /projects
- /projects/:id
- /projects/:id/towers
- /projects/:id/inventory
+/projects
+/projects/:id
+/projects/:id/towers
+/projects/:id/inventory
 
- /inventory/units
- /inventory/units/:id
+/inventory/units
+/inventory/units/:id
 
- /sales/bookings
- /sales/bookings/:id
- /sales/agreements
+/sales/bookings
+/sales/bookings/:id
+/sales/agreements
 
- /finance/payment-plans
- /finance/invoices
- /finance/invoices/:id
- /finance/payments
- /finance/collections
+/finance/payment-plans
+/finance/invoices
+/finance/invoices/:id
+/finance/payments
+/finance/collections
 
- /channel-partners
- /channel-partners/:id
+/channel-partners
+/channel-partners/:id
 
- /construction
- /construction/:projectId
+/construction
+/construction/:projectId
 
- /documents
+/documents
 
- /reports
+/reports
 
- /settings
-
+/settings
 
 61. SIDEBAR
 
 Sidebar sections:
 
 OVERVIEW
-  Dashboard
+Dashboard
 
 CRM
-  Leads
-  Follow-ups
-  Site Visits
+Leads
+Follow-ups
+Site Visits
 
 SALES
-  Opportunities
-  Bookings
-  Agreements
+Opportunities
+Bookings
+Agreements
 
 PROJECTS
-  Projects
-  Inventory
-  Towers
-  Units
+Projects
+Inventory
+Towers
+Units
 
 CUSTOMERS
-  Customers
+Customers
 
 FINANCE
-  Payment Plans
-  Invoices / Demands
-  Payments
-  Collections
+Payment Plans
+Invoices / Demands
+Payments
+Collections
 
 OPERATIONS
-  Construction
-  Channel Partners
-  Documents
+Construction
+Channel Partners
+Documents
 
 ANALYTICS
-  Reports
+Reports
 
 SYSTEM
-  Users
-  Settings
-
+Users
+Settings
 
 Show badges where useful:
 
-Leads       24
-Overdue     8
-Pending     12
-
+Leads 24
+Overdue 8
+Pending 12
 
 62. DASHBOARD QUICK ACTIONS
 
@@ -2106,7 +1962,6 @@ Create Booking
 Record Payment
 Create Invoice
 Add Project
-
 
 63. INVENTORY VISUALIZATION
 
@@ -2121,17 +1976,15 @@ Status filter
 BHK filter
 Price range
 
-
 Display units visually.
 
 Example:
 
-GREEN   = Available
-AMBER   = Hold
-BLUE    = Booked
-PURPLE  = Sold
-RED     = Blocked
-
+GREEN = Available
+AMBER = Hold
+BLUE = Booked
+PURPLE = Sold
+RED = Blocked
 
 Hover/click should show:
 
@@ -2141,7 +1994,6 @@ Area
 Price
 Status
 Customer
-
 
 64. SALES PIPELINE
 
@@ -2158,14 +2010,12 @@ Booking
 Won
 Lost
 
-
 Cards:
 
 Rajesh Kumar
 Green Heights
 ₹1.2 Cr
 Site Visit: Tomorrow
-
 
 Drag-and-drop status changes should update the mock service.
 
@@ -2178,7 +2028,6 @@ Provide export buttons.
 For demo implementation:
 
 Export CSV
-
 
 should actually generate/download a CSV.
 
@@ -2197,7 +2046,6 @@ If:
 Booking BK-1001
 Unit A-1204
 Customer Rajesh Kumar
-
 
 then:
 
@@ -2234,7 +2082,6 @@ Minimum:
 10+ Channel Partners
 30+ Site Visits
 
-
 Use realistic relationships between them.
 
 68. DELETE SAFETY
@@ -2249,13 +2096,11 @@ Show:
 
 This project contains active bookings and cannot be deleted.
 
-
 Similarly protect:
 
 Customers with bookings
 Units with bookings
 Invoices with payments
-
 
 Allow archive/deactivate where appropriate.
 
@@ -2267,7 +2112,6 @@ Archive
 Deactivate
 Cancel
 
-
 instead of hard deletion.
 
 Hard delete should primarily be available for:
@@ -2275,7 +2119,6 @@ Hard delete should primarily be available for:
 Drafts
 Unused configuration
 Demo records where safe
-
 
 70. DESIGN DETAILS
 
@@ -2338,7 +2181,6 @@ TODO
 Placeholder
 Lorem Ipsum
 
-
 for core functionality.
 
 73. IMPORTANT: BUILD IN PHASES
@@ -2359,7 +2201,6 @@ Mock service layer
 Types
 Global notifications
 
-
 Phase 2
 
 CRM:
@@ -2368,7 +2209,6 @@ Leads
 Follow-ups
 Site Visits
 Customers
-
 
 Phase 3
 
@@ -2380,7 +2220,6 @@ Floors
 Units
 Inventory visualization
 
-
 Phase 4
 
 Sales:
@@ -2389,7 +2228,6 @@ Bookings
 Holds
 Agreements
 Payment Plans
-
 
 Phase 5
 
@@ -2400,7 +2238,6 @@ Payments
 Collections
 Customer Ledger
 
-
 Phase 6
 
 Operations:
@@ -2410,7 +2247,6 @@ Channel Partners
 Commissions
 Documents
 
-
 Phase 7
 
 Analytics:
@@ -2419,7 +2255,6 @@ Dashboard
 Reports
 Charts
 Exports
-
 
 74. FINAL QUALITY REQUIREMENT
 
@@ -2441,29 +2276,27 @@ Error State
 Empty State
 Loading State
 
-
 Also test relationships.
 
 Example:
 
 Create Project
- ↓
+↓
 Create Tower
- ↓
+↓
 Create Floor
- ↓
+↓
 Create Unit
- ↓
+↓
 Create Customer
- ↓
+↓
 Create Booking
- ↓
+↓
 Create Payment Plan
- ↓
+↓
 Create Invoice
- ↓
+↓
 Record Payment
-
 
 Verify that the UI reflects the entire chain.
 
@@ -2543,7 +2376,6 @@ At completion:
 
 npm run build
 
-
 must succeed.
 
 There must be no TypeScript errors.
@@ -2561,28 +2393,26 @@ The application is currently using mock data, but the UI must behave as if it is
 Therefore:
 
 UI
- ↓
+↓
 React Query / Hooks
- ↓
+↓
 Service Layer
- ↓
+↓
 Mock Repository
-
 
 Later:
 
 UI
- ↓
+↓
 React Query / Hooks
- ↓
+↓
 Service Layer
- ↓
+↓
 REST API
- ↓
+↓
 NestJS
- ↓
+↓
 PostgreSQL
-
 
 The UI should not need to know whether the data comes from mocks or an API.
 

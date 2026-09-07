@@ -1,26 +1,27 @@
 import { cn } from "@/lib/utils";
 import { titleize } from "@/lib/format";
 
-type Tone = "neutral" | "info" | "success" | "warn" | "danger" | "accent";
+export type Tone =
+  "neutral" | "info" | "success" | "warn" | "danger" | "accent" | "purple" | "cyan" | "orange";
 
 const TONE_MAP: Record<string, Tone> = {
   // leads
   NEW: "info",
-  CONTACTED: "info",
-  SITE_VISIT: "accent",
-  QUALIFIED: "accent",
-  NEGOTIATION: "warn",
+  CONTACTED: "purple",
+  SITE_VISIT: "warn",
+  QUALIFIED: "cyan",
+  NEGOTIATION: "orange",
   CONVERTED: "success",
   LOST: "danger",
   // units
   AVAILABLE: "success",
   HOLD: "warn",
   BOOKED: "info",
-  SOLD: "accent",
+  SOLD: "purple",
   BLOCKED: "danger",
   // bookings / generic
   PENDING: "warn",
-  CONFIRMED: "success",
+  CONFIRMED: "info",
   CANCELLED: "danger",
   COMPLETED: "success",
   // invoices
@@ -37,7 +38,7 @@ const TONE_MAP: Record<string, Tone> = {
   PLANNING: "neutral",
   ACTIVE: "info",
   ON_TRACK: "success",
-  DELAYED: "danger",
+  DELAYED: "warn",
   NOT_STARTED: "neutral",
   IN_PROGRESS: "info",
   // misc
@@ -53,6 +54,7 @@ const TONE_MAP: Record<string, Tone> = {
   HIGH: "danger",
   MEDIUM: "warn",
   LOW: "neutral",
+  INACTIVE: "neutral",
 };
 
 const TONE_CLASS: Record<Tone, string> = {
@@ -62,19 +64,27 @@ const TONE_CLASS: Record<Tone, string> = {
   warn: "bg-warning-soft text-warning ring-warning/25",
   danger: "bg-destructive/10 text-destructive ring-destructive/25",
   accent: "bg-accent-soft text-accent-strong ring-accent-strong/25",
+  purple: "bg-purple-soft text-purple ring-purple/25",
+  cyan: "bg-cyan-soft text-cyan ring-cyan/25",
+  orange: "bg-orange-soft text-orange ring-orange/25",
 };
 
 export function StatusBadge({
   value,
   className,
   dot = true,
+  tone: toneOverride,
 }: {
   value?: string | null;
   className?: string;
   dot?: boolean;
+  /** Force a specific tone instead of looking it up by value — use when the same
+   * status string means different things in different contexts (e.g. a booking's
+   * PENDING is amber, but a payment's PENDING is blue). */
+  tone?: Tone | undefined;
 }) {
   if (!value) return <span className="text-muted-foreground">—</span>;
-  const tone = TONE_MAP[value] ?? "neutral";
+  const tone = toneOverride ?? TONE_MAP[value] ?? "neutral";
   return (
     <span
       className={cn(

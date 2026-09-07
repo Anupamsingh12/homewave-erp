@@ -1,0 +1,2587 @@
+BUILD A PRODUCTION-GRADE REAL ESTATE BUILDER ERP
+
+Build a complete, polished, production-quality Real Estate Developer / Builder ERP web application.
+
+This is an ADMIN-ONLY management application for real-estate builders and property developers.
+
+The application should feel like a real commercial SaaS product that can be demonstrated and sold to a builder immediately.
+
+Do NOT create a basic CRUD admin panel.
+
+The application must feel comparable to a modern combination of:
+
+Real Estate CRM
+
+Builder ERP
+
+Property Inventory Management
+
+Booking Management
+
+Customer Management
+
+Payment & Collection Management
+
+Project Management
+
+Channel Partner Management
+
+Construction Progress Management
+
+Document Management
+
+Reporting & Analytics
+
+1. PRIMARY BUSINESS WORKFLOW
+
+The application revolves around this lifecycle:
+
+LEAD
+  ↓
+FOLLOW-UP
+  ↓
+SITE VISIT
+  ↓
+OPPORTUNITY
+  ↓
+PROJECT
+  ↓
+TOWER / BLOCK
+  ↓
+FLOOR
+  ↓
+UNIT / FLAT
+  ↓
+HOLD
+  ↓
+BOOKING
+  ↓
+AGREEMENT
+  ↓
+PAYMENT PLAN
+  ↓
+DEMAND / INVOICE
+  ↓
+PAYMENT
+  ↓
+RECEIPT
+  ↓
+POSSESSION
+
+
+The system should make this lifecycle visible throughout the application.
+
+2. IMPORTANT IMPLEMENTATION RULE
+
+Every screen must actually work.
+
+Do NOT create:
+
+static mockup pages
+
+buttons that do nothing
+
+fake CRUD
+
+non-functional filters
+
+dead navigation
+
+placeholder dialogs
+
+"Coming Soon" for core modules
+
+hardcoded arrays directly inside React components
+
+Every major feature must have working:
+
+Create
+
+Read
+
+Update
+
+Delete
+
+Search
+
+Filter
+
+Sort
+
+Pagination where appropriate
+
+View details
+
+Status changes
+
+Form validation
+
+Confirmation dialogs
+
+Empty states
+
+Loading states
+
+Error states
+
+Success notifications
+
+3. ARCHITECTURE REQUIREMENT
+
+The frontend must be designed so the current mock data can be replaced by real APIs later with minimal changes.
+
+DO NOT couple UI components directly to mock data.
+
+Use a service/repository layer.
+
+Recommended structure:
+
+src/
+  components/
+  pages/
+  layouts/
+  services/
+    api/
+      client.ts
+    leads.service.ts
+    customers.service.ts
+    projects.service.ts
+    towers.service.ts
+    units.service.ts
+    bookings.service.ts
+    payments.service.ts
+    invoices.service.ts
+    payment-plans.service.ts
+    site-visits.service.ts
+    channel-partners.service.ts
+    construction.service.ts
+    documents.service.ts
+    dashboard.service.ts
+  mocks/
+    leads.mock.ts
+    customers.mock.ts
+    projects.mock.ts
+    units.mock.ts
+    bookings.mock.ts
+    payments.mock.ts
+    invoices.mock.ts
+    ...
+  types/
+  hooks/
+  utils/
+
+
+All UI screens should call services such as:
+
+leadService.list()
+leadService.getById(id)
+leadService.create(data)
+leadService.update(id, data)
+leadService.delete(id)
+
+
+Instead of:
+
+mockLeads.map(...)
+
+
+inside components.
+
+4. API-READY SERVICE ARCHITECTURE
+
+Create a central API client:
+
+apiClient
+
+
+The services should initially use mock implementations.
+
+Structure them so they can later be switched to REST APIs.
+
+Example:
+
+export const leadService = {
+  async list(filters) {},
+  async getById(id) {},
+  async create(data) {},
+  async update(id, data) {},
+  async delete(id) {},
+};
+
+
+Later this should be easy to replace with:
+
+GET /api/v1/leads
+GET /api/v1/leads/:id
+POST /api/v1/leads
+PUT /api/v1/leads/:id
+DELETE /api/v1/leads/:id
+
+
+Do not require UI changes when the backend API is introduced.
+
+5. TECHNOLOGY
+
+Use a modern production-quality frontend stack.
+
+Preferred:
+
+React
+
+TypeScript
+
+Tailwind CSS
+
+shadcn/ui
+
+React Router
+
+TanStack Query where appropriate
+
+React Hook Form
+
+Zod validation
+
+Recharts for analytics
+
+Lucide icons
+
+Use reusable components.
+
+Avoid unnecessary dependencies.
+
+6. APPLICATION LAYOUT
+
+Create a premium SaaS layout.
+
+Desktop
+
+┌─────────────────────────────────────────────────────────────┐
+│ Logo          Search...          Notifications   Admin      │
+├───────────────┬─────────────────────────────────────────────┤
+│               │                                             │
+│ Dashboard     │                                             │
+│               │                                             │
+│ CRM           │               MAIN CONTENT                  │
+│  Leads        │                                             │
+│  Site Visits  │                                             │
+│  Follow-ups   │                                             │
+│               │                                             │
+│ Sales         │                                             │
+│  Opportunities│                                             │
+│  Bookings     │                                             │
+│  Agreements   │                                             │
+│               │                                             │
+│ Projects      │                                             │
+│  Projects     │                                             │
+│  Inventory    │                                             │
+│  Towers       │                                             │
+│  Units        │                                             │
+│               │                                             │
+│ Finance       │                                             │
+│  Payment Plans│                                             │
+│  Invoices     │                                             │
+│  Payments     │                                             │
+│  Outstanding  │                                             │
+│               │                                             │
+│ Operations    │                                             │
+│  Construction │                                             │
+│  Channel      │                                             │
+│  Documents    │                                             │
+│               │                                             │
+│ Reports       │                                             │
+│ Settings      │                                             │
+└───────────────┴─────────────────────────────────────────────┘
+
+
+On mobile:
+
+collapsible sidebar
+
+bottom/slide navigation where appropriate
+
+responsive tables
+
+cards instead of wide tables
+
+responsive dialogs
+
+sticky important actions
+
+7. BRAND / VISUAL DESIGN
+
+The UI must look premium, trustworthy and suitable for a real-estate company.
+
+Visual direction:
+
+sophisticated
+
+professional
+
+minimal
+
+high-end
+
+modern SaaS
+
+excellent whitespace
+
+strong typography
+
+subtle borders
+
+restrained shadows
+
+clean cards
+
+clear hierarchy
+
+Do NOT make it look like a generic Bootstrap admin dashboard.
+
+8. COLOR SYSTEM
+
+Use a consistent semantic color system.
+
+Primary brand:
+
+Deep Navy / Slate
+
+
+Secondary:
+
+Warm Gold / Amber
+
+
+Use gold sparingly for premium/high-value highlights.
+
+Semantic colors:
+
+Success     → Green
+Warning     → Amber
+Danger      → Red
+Info        → Blue
+Neutral     → Slate/Gray
+
+
+IMPORTANT:
+
+Do not use random colors for statuses.
+
+Use the same status color everywhere.
+
+9. STATUS COLOR SYSTEM
+
+Lead
+
+NEW             → Blue
+CONTACTED       → Purple
+SITE_VISIT      → Amber
+QUALIFIED       → Cyan
+NEGOTIATION     → Orange
+CONVERTED       → Green
+LOST            → Red
+
+
+Unit
+
+AVAILABLE       → Green
+HOLD            → Amber
+BOOKED          → Blue
+SOLD            → Purple
+BLOCKED         → Red
+
+
+Booking
+
+PENDING         → Amber
+CONFIRMED       → Blue
+CANCELLED       → Red
+COMPLETED       → Green
+
+
+Payment
+
+PAID            → Green
+PARTIAL         → Amber
+PENDING         → Blue
+OVERDUE         → Red
+FAILED          → Red
+
+
+Project
+
+PLANNING        → Slate
+ACTIVE          → Blue
+ON_TRACK        → Green
+DELAYED         → Amber
+COMPLETED       → Green
+
+
+Create reusable:
+
+StatusBadge
+StatusDot
+StatusTimeline
+
+
+components.
+
+10. DASHBOARD
+
+Create a high-quality executive dashboard.
+
+Top KPI cards:
+
+Total Leads
+New Leads
+Site Visits
+Bookings This Month
+Sales Value
+Collections This Month
+Outstanding Amount
+Available Units
+
+
+Example:
+
+₹12.8 Cr
+Sales This Month
+↑ 18.4%
+
+
+Charts:
+
+Lead Funnel
+
+Leads
+ ↓
+Contacted
+ ↓
+Qualified
+ ↓
+Site Visit
+ ↓
+Negotiation
+ ↓
+Booking
+
+
+Sales Trend
+
+Monthly sales chart.
+
+Collection Trend
+
+Monthly collection chart.
+
+Inventory
+
+Available
+Hold
+Booked
+Sold
+
+
+Project Performance
+
+Show:
+
+Project
+Units
+Sold
+Available
+Sales Value
+Collected
+Outstanding
+
+
+Recent Activities
+
+Examples:
+
+Rajesh Kumar booked Tower A / A-1204
+2 minutes ago
+
+Priya Sharma payment received ₹5,00,000
+18 minutes ago
+
+Amit requested site visit
+42 minutes ago
+
+
+11. GLOBAL SEARCH
+
+Create a global search.
+
+Search across:
+
+Leads
+Customers
+Projects
+Units
+Bookings
+Invoices
+Payments
+Channel Partners
+
+
+Example:
+
+Search "A-1204"
+
+Results:
+Unit A-1204
+Customer Rajesh Kumar
+Booking #BK-10234
+Invoice #INV-2024
+
+
+12. CRM MODULE
+
+Leads
+
+Route:
+
+/crm/leads
+
+
+Table columns:
+
+Lead ID
+Name
+Phone
+Email
+Source
+Interested Project
+Budget
+Lead Status
+Assigned To
+Next Follow-up
+Created
+Actions
+
+
+Filters:
+
+Status
+Source
+Project
+Assigned To
+Budget
+Date
+
+
+Search:
+
+Name
+Phone
+Email
+Lead ID
+
+
+Actions:
+
+View
+Edit
+Delete
+Change Status
+Schedule Follow-up
+Schedule Site Visit
+Convert to Customer
+
+
+13. LEAD DETAIL PAGE
+
+Create a rich CRM detail page.
+
+Header:
+
+Rajesh Kumar
+Qualified
+₹1.2 Cr Budget
+
+
+Sections:
+
+Contact Information
+Lead Information
+Interested Projects
+Communication
+Follow-ups
+Site Visits
+Notes
+Documents
+Activity Timeline
+
+
+Activity timeline:
+
+Today
+│
+├── Called customer
+│
+├── Site visit scheduled
+│
+└── Brochure sent
+
+
+Actions:
+
+Call
+WhatsApp
+Email
+Schedule Visit
+Add Follow-up
+Convert
+
+
+14. FOLLOW-UPS
+
+Create a dedicated follow-up management screen.
+
+Views:
+
+Today
+Upcoming
+Overdue
+Completed
+
+
+Each follow-up:
+
+Customer
+Task
+Due Date
+Assigned User
+Priority
+Status
+
+
+Provide:
+
+create
+
+edit
+
+complete
+
+delete
+
+reschedule
+
+15. SITE VISITS
+
+Create site visit management.
+
+Fields:
+
+Lead / Customer
+Project
+Visit Date
+Visit Time
+Assigned Salesperson
+Visitors
+Status
+Notes
+
+
+Statuses:
+
+SCHEDULED
+COMPLETED
+NO_SHOW
+CANCELLED
+
+
+Calendar-style UI is preferred.
+
+16. CUSTOMERS
+
+Route:
+
+/customers
+
+
+Fields:
+
+Customer ID
+Name
+Phone
+Email
+PAN
+Address
+Source
+Assigned Salesperson
+Projects
+Units
+Booking Value
+Outstanding
+
+
+Customer detail should show:
+
+Profile
+Bookings
+Units
+Payment Plan
+Invoices
+Payments
+Outstanding
+Documents
+Communication
+Activity Timeline
+
+
+17. PROJECT MANAGEMENT
+
+Route:
+
+/projects
+
+
+Project cards/table.
+
+Fields:
+
+Project Name
+Code
+Location
+Developer
+RERA Number
+Start Date
+Expected Completion
+Status
+Total Units
+Available
+Booked
+Sold
+
+
+Actions:
+
+Create
+Edit
+Delete
+View
+Archive
+
+
+18. PROJECT DETAIL
+
+Create a premium project dashboard.
+
+Header:
+
+Green Heights
+Mumbai
+RERA: PXXXXXX
+ACTIVE
+
+
+Tabs:
+
+Overview
+Inventory
+Towers
+Construction
+Sales
+Collections
+Customers
+Documents
+Reports
+
+
+Overview:
+
+Total Units
+Available
+On Hold
+Booked
+Sold
+Sales Value
+Collected
+Outstanding
+
+
+19. TOWERS / BUILDINGS
+
+Each project can have multiple towers.
+
+Fields:
+
+Tower Name
+Tower Code
+Floors
+Total Units
+Available Units
+Booked Units
+Sold Units
+Status
+
+
+CRUD fully working.
+
+20. FLOORS
+
+Each tower has floors.
+
+Fields:
+
+Floor Number
+Total Units
+Available
+Booked
+Sold
+
+
+21. UNIT / FLAT INVENTORY
+
+This is one of the most important screens.
+
+Create a visual inventory experience.
+
+Example:
+
+TOWER A
+
+Floor 12
+┌────────┬────────┬────────┬────────┐
+│ A-1201 │ A-1202 │ A-1203 │ A-1204 │
+│ Green  │ Blue   │ Green  │ Purple │
+└────────┴────────┴────────┴────────┘
+
+Floor 11
+┌────────┬────────┬────────┬────────┐
+│ A-1101 │ A-1102 │ A-1103 │ A-1104 │
+│ Green  │ Red    │ Green  │ Amber  │
+└────────┴────────┴────────┴────────┘
+
+
+Color indicates unit status.
+
+Unit statuses:
+
+AVAILABLE
+HOLD
+BOOKED
+SOLD
+BLOCKED
+
+
+Clicking a unit opens its detail.
+
+22. UNIT DETAIL
+
+Display:
+
+A-1204
+3 BHK
+1450 sq.ft
+Tower A
+12th Floor
+
+
+Pricing:
+
+Base Price
+PLC
+Parking
+Floor Rise
+Other Charges
+GST
+Total Agreement Value
+
+
+Status.
+
+Customer if booked.
+
+Booking information.
+
+Payment summary.
+
+Actions:
+
+Hold Unit
+Release Hold
+Book Unit
+Edit
+Block
+
+
+23. UNIT HOLD
+
+Allow sales staff to hold a unit.
+
+Fields:
+
+Customer
+Salesperson
+Hold Date
+Expiry Date
+Reason
+
+
+Show countdown where appropriate.
+
+Example:
+
+HOLD
+Expires in 4h 32m
+
+
+Expired holds should automatically return to available status in mock/business logic.
+
+24. BOOKINGS
+
+Route:
+
+/sales/bookings
+
+
+Table:
+
+Booking ID
+Customer
+Project
+Tower
+Unit
+Booking Date
+Booking Amount
+Agreement Value
+Payment Status
+Booking Status
+Salesperson
+
+
+Filters:
+
+Project
+Tower
+Status
+Payment Status
+Salesperson
+Date
+
+
+25. BOOKING DETAIL
+
+Create a complete booking detail page.
+
+Header:
+
+Booking #BK-10234
+CONFIRMED
+
+Rajesh Kumar
+Green Heights
+Tower A / A-1204
+
+
+Sections:
+
+Booking Information
+Customer
+Unit
+Pricing
+Payment Plan
+Invoices
+Payments
+Documents
+Activity
+
+
+Show financial summary:
+
+Agreement Value     ₹1,25,00,000
+Paid                ₹35,00,000
+Due                 ₹90,00,000
+Overdue             ₹10,00,000
+
+
+26. AGREEMENTS
+
+Create agreement management.
+
+Fields:
+
+Agreement Number
+Booking
+Customer
+Unit
+Agreement Date
+Agreement Value
+Status
+Document
+
+
+Statuses:
+
+DRAFT
+GENERATED
+SENT
+SIGNED
+CANCELLED
+
+
+Allow:
+
+create
+
+edit
+
+view
+
+upload document
+
+change status
+
+delete draft
+
+27. PAYMENT PLANS
+
+Create configurable payment plans.
+
+Example:
+
+Payment Plan
+Construction Linked Plan
+
+Booking             ₹5,00,000
+Agreement            ₹20,00,000
+Foundation           ₹10,00,000
+Slab                 ₹15,00,000
+Brickwork            ₹15,00,000
+Possession           ₹60,00,000
+
+
+Each milestone:
+
+Name
+Percentage
+Amount
+Due Type
+Due Date
+Construction Milestone
+
+
+Support:
+
+Fixed Amount
+Percentage
+Date Based
+Construction Milestone Based
+
+
+28. INVOICES / DEMANDS
+
+Route:
+
+/finance/invoices
+
+
+Create invoices/demand letters.
+
+Fields:
+
+Invoice Number
+Customer
+Booking
+Unit
+Demand Type
+Issue Date
+Due Date
+Amount
+Tax
+Total
+Paid
+Outstanding
+Status
+
+
+Statuses:
+
+DRAFT
+ISSUED
+PARTIALLY_PAID
+PAID
+OVERDUE
+CANCELLED
+
+
+Invoice detail:
+
+Invoice Header
+Customer
+Unit
+Line Items
+Tax
+Total
+Payments
+Outstanding
+Documents
+
+
+Actions:
+
+Create
+Edit
+Issue
+Record Payment
+Download
+Cancel
+Delete Draft
+
+
+29. PAYMENTS
+
+Route:
+
+/finance/payments
+
+
+Fields:
+
+Receipt Number
+Payment Date
+Customer
+Booking
+Invoice
+Amount
+Payment Mode
+Reference Number
+Status
+
+
+Payment modes:
+
+BANK_TRANSFER
+UPI
+CHEQUE
+CASH
+CARD
+NEFT
+RTGS
+OTHER
+
+
+Record payment workflow:
+
+Invoice
+ ↓
+Record Payment
+ ↓
+Amount
+ ↓
+Payment Method
+ ↓
+Reference
+ ↓
+Confirm
+ ↓
+Receipt Generated
+
+
+30. CUSTOMER LEDGER
+
+Each customer should have a financial ledger.
+
+Example:
+
+Date       Description          Debit       Credit      Balance
+
+01 Sep     Booking              ₹5,00,000
+15 Sep     Agreement Demand     ₹20,00,000
+20 Sep     Payment                         ₹10,00,000
+
+
+Show:
+
+Total Agreement Value
+Total Demanded
+Total Paid
+Total Outstanding
+Overdue
+
+
+31. COLLECTIONS DASHBOARD
+
+Create:
+
+Total Receivable
+Collected
+Outstanding
+Overdue
+Due This Week
+Due This Month
+
+
+Charts:
+
+Collection Trend
+Outstanding by Project
+Overdue Aging
+
+
+Aging:
+
+0–30 days
+31–60 days
+61–90 days
+90+ days
+
+
+32. CHANNEL PARTNERS / BROKERS
+
+Create:
+
+Channel Partners
+
+
+Fields:
+
+Company
+Contact Person
+Phone
+Email
+RERA Number
+Commission %
+Status
+
+
+Manage:
+
+Leads
+Site Visits
+Bookings
+Commission
+Payouts
+
+
+Broker detail:
+
+Total Leads
+Site Visits
+Bookings
+Sales Value
+Commission Earned
+Commission Paid
+Outstanding Commission
+
+
+33. COMMISSION MANAGEMENT
+
+Create commission rules.
+
+Example:
+
+Project
+Unit
+Channel Partner
+Commission %
+Commission Amount
+Booking
+Eligibility
+Payout Status
+
+
+Statuses:
+
+PENDING
+ELIGIBLE
+APPROVED
+PAID
+CANCELLED
+
+
+34. CONSTRUCTION MODULE
+
+Create a lightweight but useful construction module.
+
+Projects contain construction milestones.
+
+Example:
+
+Land
+Foundation
+Plinth
+Structure
+Brickwork
+Plaster
+Electrical
+Finishing
+Amenities
+Possession
+
+
+Each milestone:
+
+Name
+Start Date
+Expected Date
+Actual Date
+Progress %
+Status
+Notes
+
+
+Statuses:
+
+NOT_STARTED
+IN_PROGRESS
+ON_TRACK
+DELAYED
+COMPLETED
+
+
+35. CONSTRUCTION DASHBOARD
+
+Show:
+
+Overall Progress
+Current Milestone
+Delayed Milestones
+Upcoming Milestones
+
+
+Visual progress timeline.
+
+Example:
+
+Foundation       ██████████ 100%
+Structure        ████████░░ 80%
+Brickwork        █████░░░░░ 50%
+Plaster          ██░░░░░░░░ 20%
+
+
+36. DOCUMENT MANAGEMENT
+
+Create document management.
+
+Documents can belong to:
+
+Lead
+Customer
+Project
+Unit
+Booking
+Agreement
+Invoice
+Payment
+
+
+Document fields:
+
+Name
+Type
+Entity
+Uploaded By
+Uploaded Date
+Status
+
+
+Document types:
+
+PAN
+AADHAAR
+KYC
+AGREEMENT
+BOOKING_FORM
+DEMAND_LETTER
+INVOICE
+PAYMENT_RECEIPT
+POSSESSION_LETTER
+OTHER
+
+
+Provide:
+
+Upload
+Preview
+Download
+Delete
+
+
+For demo mode, simulate upload using mock file metadata.
+
+37. REPORTS
+
+Create a reports module.
+
+Reports:
+
+Sales
+
+Sales by Project
+Sales by Tower
+Sales by Salesperson
+Sales by Month
+
+
+Inventory
+
+Available Units
+Booked Units
+Sold Units
+Inventory Value
+
+
+Collections
+
+Collected
+Outstanding
+Overdue
+Aging
+
+
+CRM
+
+Lead Sources
+Conversion Rate
+Site Visit Conversion
+Salesperson Performance
+
+
+Channel Partners
+
+Leads
+Bookings
+Sales Value
+Commission
+
+
+Use charts and export buttons.
+
+38. USER / ADMIN MANAGEMENT
+
+Create basic admin user management.
+
+Roles:
+
+SUPER_ADMIN
+ADMIN
+SALES_MANAGER
+SALES_EXECUTIVE
+ACCOUNTS
+PROJECT_MANAGER
+
+
+Role permissions should be represented in the UI.
+
+For demo purposes, authentication can be mocked, but structure it so real authentication can be connected later.
+
+39. SETTINGS
+
+Create settings screens:
+
+Company Profile
+Users
+Roles & Permissions
+Projects
+Booking Settings
+Payment Settings
+Tax Settings
+Notification Settings
+Document Settings
+
+
+40. CRUD UX STANDARD
+
+Every CRUD page must follow the same pattern.
+
+Header:
+
+Title
+Description
+Primary CTA
+
+
+Toolbar:
+
+Search
+Filters
+View Toggle
+Export
+
+
+Table:
+
+Data
+Status
+Actions
+
+
+Create/Edit:
+
+Use a proper form dialog or dedicated page.
+
+Never use browser prompt().
+
+Delete:
+
+Always show confirmation dialog.
+
+Example:
+
+Delete Project?
+
+This action cannot be undone.
+
+[Cancel] [Delete Project]
+
+
+41. FORMS
+
+All forms must have:
+
+labels
+
+placeholders
+
+validation
+
+required indicators
+
+helpful errors
+
+proper input types
+
+select/dropdowns
+
+date pickers
+
+currency formatting
+
+loading state
+
+submit state
+
+success feedback
+
+Use React Hook Form + Zod.
+
+Example validation:
+
+Project name → required
+Phone → valid phone
+Email → valid email
+Amount → positive number
+Percentage → 0–100
+Date → valid date
+
+
+42. TABLE UX
+
+Tables should support:
+
+sorting
+
+filtering
+
+pagination
+
+row actions
+
+status badges
+
+responsive behaviour
+
+sticky header where useful
+
+column visibility where useful
+
+Do not create overly dense tables.
+
+On mobile, transform rows into cards where appropriate.
+
+43. DETAIL PAGE UX
+
+Every major entity should have a detail page.
+
+Use:
+
+Header
+Summary Cards
+Tabs
+Activity Timeline
+Related Records
+
+
+For example:
+
+Customer
+├── Overview
+├── Bookings
+├── Payments
+├── Invoices
+├── Documents
+└── Activity
+
+
+44. NOTIFICATIONS
+
+Use toast notifications for:
+
+Created successfully
+Updated successfully
+Deleted successfully
+Payment recorded
+Booking confirmed
+Unit held
+Unit released
+Invoice issued
+
+
+Errors should be clear and actionable.
+
+45. EMPTY STATES
+
+Every list must have a meaningful empty state.
+
+Example:
+
+No leads found
+
+Start building your sales pipeline by adding your first lead.
+
+[Add Lead]
+
+
+Do not leave blank tables.
+
+46. LOADING STATES
+
+Use skeleton loaders for:
+
+dashboard cards
+
+tables
+
+detail pages
+
+charts
+
+lists
+
+Avoid flashing empty content.
+
+47. ERROR STATES
+
+Provide friendly error states.
+
+Example:
+
+Unable to load bookings
+
+Something went wrong while fetching booking data.
+
+[Try Again]
+
+
+48. MOCK DATA
+
+Create realistic demo data.
+
+Do not use:
+
+John Doe
+Test Project
+ABC
+Lorem ipsum
+
+
+Use realistic Indian real-estate data.
+
+Example projects:
+
+Green Heights
+Palm Residency
+Skyline One
+Urban Vista
+
+
+Indian cities:
+
+Mumbai
+Pune
+Bangalore
+Delhi NCR
+Hyderabad
+
+
+Customers should have realistic:
+
+Indian names
+Indian phone numbers
+email addresses
+budgets
+PAN-like masked values
+
+
+Use realistic currency formatting:
+
+₹1,25,00,000
+₹75,00,000
+₹12,50,000
+
+
+49. MOCK SERVICE BEHAVIOUR
+
+Mock services must behave like real APIs.
+
+Do not simply return static arrays.
+
+Implement:
+
+create()
+update()
+delete()
+getById()
+list()
+filter()
+search()
+
+
+Use a centralized mock store/repository.
+
+When the user creates a lead:
+
+it should appear in the list
+
+dashboard counts should update where applicable
+
+detail page should work
+
+editing should persist during the session
+
+deleting should remove it
+
+Same principle applies to:
+
+Projects
+Towers
+Units
+Customers
+Bookings
+Invoices
+Payments
+Channel Partners
+Site Visits
+Follow-ups
+Documents
+
+
+50. BUSINESS LOGIC
+
+Implement realistic relationships.
+
+Example:
+
+Project
+  ↓
+Tower
+  ↓
+Floor
+  ↓
+Unit
+
+
+A unit belongs to exactly one project/tower/floor.
+
+Booking:
+
+Customer
++
+Project
++
+Unit
+
+
+A booked unit cannot be booked again.
+
+When:
+
+Unit = BOOKED
+
+
+it must not appear as available for another booking.
+
+When a booking is cancelled:
+
+Unit → AVAILABLE
+
+
+unless another valid hold exists.
+
+51. BOOKING BUSINESS RULES
+
+Implement:
+
+AVAILABLE → HOLD
+HOLD → BOOKED
+BOOKED → SOLD
+HOLD → AVAILABLE
+BOOKED → CANCELLED → AVAILABLE
+
+
+Prevent invalid transitions.
+
+Show clear errors:
+
+This unit is already booked.
+
+
+52. FINANCIAL BUSINESS RULES
+
+When a payment is recorded:
+
+Invoice Paid Amount increases
+Invoice Outstanding decreases
+Customer Outstanding decreases
+Booking Collection increases
+
+
+When invoice becomes fully paid:
+
+Status = PAID
+
+
+If partially paid:
+
+Status = PARTIALLY_PAID
+
+
+If due date passes with outstanding amount:
+
+Status = OVERDUE
+
+
+53. CURRENCY
+
+All financial values should use INR.
+
+Use:
+
+₹
+
+
+and Indian number formatting.
+
+Examples:
+
+₹5,00,000
+₹25,50,000
+₹1,25,00,000
+
+
+54. DATE / TIME
+
+Use consistent formatting.
+
+Example:
+
+31 Aug 2026
+31 Aug 2026, 10:30 AM
+
+
+Use date-fns or equivalent utility.
+
+55. ACTIVITY TIMELINE
+
+Create reusable activity timeline.
+
+Example:
+
+31 Aug
+
+10:42 AM
+Payment of ₹5,00,000 received
+
+09:30 AM
+Booking confirmed
+
+Yesterday
+
+4:15 PM
+Agreement generated
+
+
+Use across:
+
+Lead
+Customer
+Booking
+Project
+Unit
+Invoice
+Payment
+
+
+56. COMMAND / QUICK ACTIONS
+
+Add useful quick actions.
+
+Dashboard:
+
++ Add Lead
++ Add Customer
++ Add Project
++ New Booking
++ Record Payment
++ Create Invoice
+
+
+Keyboard-friendly where possible.
+
+57. RESPONSIVE DESIGN
+
+The application must be fully responsive.
+
+Desktop:
+
+1440px+
+
+
+Tablet:
+
+768px–1439px
+
+
+Mobile:
+
+<768px
+
+
+Do not simply shrink desktop tables.
+
+Create responsive layouts intentionally.
+
+58. ACCESSIBILITY
+
+Implement:
+
+semantic HTML
+
+keyboard navigation
+
+visible focus states
+
+accessible dialogs
+
+accessible form labels
+
+proper button labels
+
+sufficient contrast
+
+59. PERFORMANCE
+
+Avoid unnecessary rendering.
+
+Use:
+
+memoization only where useful
+
+pagination
+
+lazy loading where appropriate
+
+reusable components
+
+efficient state management
+
+Do not over-engineer.
+
+60. ROUTING
+
+Create clean routes.
+
+Example:
+
+/
+ /dashboard
+
+ /crm
+ /crm/leads
+ /crm/leads/:id
+ /crm/follow-ups
+ /crm/site-visits
+
+ /customers
+ /customers/:id
+
+ /projects
+ /projects/:id
+ /projects/:id/towers
+ /projects/:id/inventory
+
+ /inventory/units
+ /inventory/units/:id
+
+ /sales/bookings
+ /sales/bookings/:id
+ /sales/agreements
+
+ /finance/payment-plans
+ /finance/invoices
+ /finance/invoices/:id
+ /finance/payments
+ /finance/collections
+
+ /channel-partners
+ /channel-partners/:id
+
+ /construction
+ /construction/:projectId
+
+ /documents
+
+ /reports
+
+ /settings
+
+
+61. SIDEBAR
+
+Sidebar sections:
+
+OVERVIEW
+  Dashboard
+
+CRM
+  Leads
+  Follow-ups
+  Site Visits
+
+SALES
+  Opportunities
+  Bookings
+  Agreements
+
+PROJECTS
+  Projects
+  Inventory
+  Towers
+  Units
+
+CUSTOMERS
+  Customers
+
+FINANCE
+  Payment Plans
+  Invoices / Demands
+  Payments
+  Collections
+
+OPERATIONS
+  Construction
+  Channel Partners
+  Documents
+
+ANALYTICS
+  Reports
+
+SYSTEM
+  Users
+  Settings
+
+
+Show badges where useful:
+
+Leads       24
+Overdue     8
+Pending     12
+
+
+62. DASHBOARD QUICK ACTIONS
+
+Add prominent actions:
+
+Add Lead
+Schedule Site Visit
+Create Booking
+Record Payment
+Create Invoice
+Add Project
+
+
+63. INVENTORY VISUALIZATION
+
+The inventory screen should be one of the strongest screens in the product.
+
+Allow:
+
+Project selector
+Tower selector
+Floor selector
+Status filter
+BHK filter
+Price range
+
+
+Display units visually.
+
+Example:
+
+GREEN   = Available
+AMBER   = Hold
+BLUE    = Booked
+PURPLE  = Sold
+RED     = Blocked
+
+
+Hover/click should show:
+
+Unit
+BHK
+Area
+Price
+Status
+Customer
+
+
+64. SALES PIPELINE
+
+Create a Kanban view for leads/opportunities.
+
+Columns:
+
+New
+Contacted
+Qualified
+Site Visit
+Negotiation
+Booking
+Won
+Lost
+
+
+Cards:
+
+Rajesh Kumar
+Green Heights
+₹1.2 Cr
+Site Visit: Tomorrow
+
+
+Drag-and-drop status changes should update the mock service.
+
+If drag-and-drop is too complex for the current stack, provide a working status-change dropdown instead.
+
+65. REPORT EXPORT
+
+Provide export buttons.
+
+For demo implementation:
+
+Export CSV
+
+
+should actually generate/download a CSV.
+
+PDF export can be mocked initially if a PDF library is not already installed, but the UI should be structured for later integration.
+
+66. DATA CONSISTENCY
+
+Do not create disconnected fake data.
+
+Relationships must make sense.
+
+For example:
+
+If:
+
+Booking BK-1001
+Unit A-1204
+Customer Rajesh Kumar
+
+
+then:
+
+Unit A-1204 should show Rajesh Kumar
+
+Customer Rajesh Kumar should show the booking
+
+Booking should show the project
+
+Project inventory should show A-1204 as booked
+
+Payment records should reference the booking
+
+Invoice should reference the booking
+
+Customer outstanding should reflect invoice/payment data
+
+The mock repository should maintain these relationships.
+
+67. DEMO DATA SIZE
+
+Create enough data to make the application feel real.
+
+Minimum:
+
+50+ Leads
+20+ Customers
+4+ Projects
+8+ Towers
+100+ Units
+20+ Bookings
+30+ Invoices
+40+ Payments
+10+ Channel Partners
+30+ Site Visits
+
+
+Use realistic relationships between them.
+
+68. DELETE SAFETY
+
+Do not allow destructive operations that would break relationships.
+
+For example:
+
+Do not delete a project if it has active bookings without warning.
+
+Show:
+
+This project contains active bookings and cannot be deleted.
+
+
+Similarly protect:
+
+Customers with bookings
+Units with bookings
+Invoices with payments
+
+
+Allow archive/deactivate where appropriate.
+
+69. ARCHIVE VS DELETE
+
+For business-critical records prefer:
+
+Archive
+Deactivate
+Cancel
+
+
+instead of hard deletion.
+
+Hard delete should primarily be available for:
+
+Drafts
+Unused configuration
+Demo records where safe
+
+
+70. DESIGN DETAILS
+
+Use:
+
+8px spacing system
+
+rounded cards
+
+subtle borders
+
+restrained shadows
+
+clear typography hierarchy
+
+compact but readable tables
+
+premium empty states
+
+polished dialogs
+
+hover states
+
+transition animations where useful
+
+Avoid excessive animations.
+
+71. MICRO-INTERACTIONS
+
+Use subtle animations for:
+
+modal open
+
+dropdown
+
+toast
+
+sidebar
+
+card hover
+
+status updates
+
+skeleton loading
+
+Keep animations fast and professional.
+
+72. NO PLACEHOLDER UI
+
+Every visible button should either:
+
+perform the intended action, or
+
+be omitted.
+
+Do not include:
+
+Coming Soon
+TODO
+Placeholder
+Lorem Ipsum
+
+
+for core functionality.
+
+73. IMPORTANT: BUILD IN PHASES
+
+Implement in this order:
+
+Phase 1
+
+Foundation:
+
+App shell
+Routing
+Theme
+Sidebar
+Header
+Reusable components
+Mock service layer
+Types
+Global notifications
+
+
+Phase 2
+
+CRM:
+
+Leads
+Follow-ups
+Site Visits
+Customers
+
+
+Phase 3
+
+Projects:
+
+Projects
+Towers
+Floors
+Units
+Inventory visualization
+
+
+Phase 4
+
+Sales:
+
+Bookings
+Holds
+Agreements
+Payment Plans
+
+
+Phase 5
+
+Finance:
+
+Invoices
+Payments
+Collections
+Customer Ledger
+
+
+Phase 6
+
+Operations:
+
+Construction
+Channel Partners
+Commissions
+Documents
+
+
+Phase 7
+
+Analytics:
+
+Dashboard
+Reports
+Charts
+Exports
+
+
+74. FINAL QUALITY REQUIREMENT
+
+Before considering the application complete, verify every route manually.
+
+For every module test:
+
+Create
+Read
+Update
+Delete / Archive
+Search
+Filter
+Sort
+View Detail
+Status Change
+Validation
+Error State
+Empty State
+Loading State
+
+
+Also test relationships.
+
+Example:
+
+Create Project
+ ↓
+Create Tower
+ ↓
+Create Floor
+ ↓
+Create Unit
+ ↓
+Create Customer
+ ↓
+Create Booking
+ ↓
+Create Payment Plan
+ ↓
+Create Invoice
+ ↓
+Record Payment
+
+
+Verify that the UI reflects the entire chain.
+
+75. FINAL PRODUCT GOAL
+
+The finished application should feel like:
+
+A premium, production-grade Builder ERP that a real estate developer could start using immediately.
+
+It should not feel like:
+
+"a frontend demo with some tables."
+
+The strongest parts of the product should be:
+
+Executive Dashboard
+
+CRM / Lead Pipeline
+
+Project Inventory
+
+Unit Visualizer
+
+Booking Workflow
+
+Payment Plan
+
+Invoices / Demands
+
+Collections
+
+Customer 360
+
+Project Dashboard
+
+The UI must be polished enough to present directly to a prospective builder client.
+
+76. CLAUDE CODE EXECUTION INSTRUCTIONS
+
+Before implementing anything:
+
+Inspect the existing repository.
+
+Identify the current framework.
+
+Identify existing UI libraries.
+
+Identify existing routing.
+
+Identify existing state management.
+
+Identify existing API/service patterns.
+
+Identify existing authentication.
+
+Reuse existing architecture where appropriate.
+
+Do not unnecessarily replace existing infrastructure.
+
+Then implement the application incrementally.
+
+After each major phase:
+
+run type checking
+
+run lint
+
+run tests
+
+fix errors
+
+verify routes
+
+verify CRUD
+
+At completion:
+
+npm run build
+
+
+must succeed.
+
+There must be no TypeScript errors.
+
+There must be no broken routes.
+
+There must be no console errors caused by the application.
+
+There must be no dead core functionality.
+
+77. MOST IMPORTANT ARCHITECTURAL PRINCIPLE
+
+The application is currently using mock data, but the UI must behave as if it is connected to a real backend.
+
+Therefore:
+
+UI
+ ↓
+React Query / Hooks
+ ↓
+Service Layer
+ ↓
+Mock Repository
+
+
+Later:
+
+UI
+ ↓
+React Query / Hooks
+ ↓
+Service Layer
+ ↓
+REST API
+ ↓
+NestJS
+ ↓
+PostgreSQL
+
+
+The UI should not need to know whether the data comes from mocks or an API.
+
+This is a mandatory requirement.

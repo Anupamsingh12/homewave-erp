@@ -3,7 +3,10 @@ import type { Activity } from "@/types";
 import { EmptyState } from "./EmptyState";
 
 export function ActivityTimeline({ items }: { items: Activity[] }) {
-  if (!items.length) return <EmptyState title="No activity yet" description="Actions on this record will appear here." />;
+  if (!items.length)
+    return (
+      <EmptyState title="No activity yet" description="Actions on this record will appear here." />
+    );
   return (
     <ol className="relative space-y-5 pl-6">
       <span className="absolute top-1 bottom-1 left-[7px] w-px bg-border" aria-hidden />

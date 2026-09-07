@@ -67,7 +67,11 @@ export function applyQuery<T extends Record<string, unknown>>(
   if (q.search?.trim()) {
     const term = q.search.trim().toLowerCase();
     out = out.filter((r) =>
-      searchFields.some((f) => String(r[f] ?? "").toLowerCase().includes(term)),
+      searchFields.some((f) =>
+        String(r[f] ?? "")
+          .toLowerCase()
+          .includes(term),
+      ),
     );
   }
 
