@@ -1,11 +1,5 @@
 export type LeadStatus =
-  | "NEW"
-  | "CONTACTED"
-  | "SITE_VISIT"
-  | "QUALIFIED"
-  | "NEGOTIATION"
-  | "CONVERTED"
-  | "LOST";
+  "NEW" | "CONTACTED" | "SITE_VISIT" | "QUALIFIED" | "NEGOTIATION" | "CONVERTED" | "LOST";
 
 export type UnitStatus = "AVAILABLE" | "HOLD" | "BOOKED" | "SOLD" | "BLOCKED";
 
@@ -16,12 +10,7 @@ export type PaymentStatus = "PAID" | "PARTIAL" | "PENDING" | "OVERDUE" | "FAILED
 export type ProjectStatus = "PLANNING" | "ACTIVE" | "ON_TRACK" | "DELAYED" | "COMPLETED";
 
 export type InvoiceStatus =
-  | "DRAFT"
-  | "ISSUED"
-  | "PARTIALLY_PAID"
-  | "PAID"
-  | "OVERDUE"
-  | "CANCELLED";
+  "DRAFT" | "ISSUED" | "PARTIALLY_PAID" | "PAID" | "OVERDUE" | "CANCELLED";
 
 export type AgreementStatus = "DRAFT" | "GENERATED" | "SENT" | "SIGNED" | "CANCELLED";
 
@@ -31,24 +20,12 @@ export type FollowUpStatus = "OPEN" | "COMPLETED" | "CANCELLED";
 
 export type Priority = "LOW" | "MEDIUM" | "HIGH";
 
-export type MilestoneStatus =
-  | "NOT_STARTED"
-  | "IN_PROGRESS"
-  | "ON_TRACK"
-  | "DELAYED"
-  | "COMPLETED";
+export type MilestoneStatus = "NOT_STARTED" | "IN_PROGRESS" | "ON_TRACK" | "DELAYED" | "COMPLETED";
 
 export type CommissionStatus = "PENDING" | "ELIGIBLE" | "APPROVED" | "PAID" | "CANCELLED";
 
 export type PaymentMode =
-  | "BANK_TRANSFER"
-  | "UPI"
-  | "CHEQUE"
-  | "CASH"
-  | "CARD"
-  | "NEFT"
-  | "RTGS"
-  | "OTHER";
+  "BANK_TRANSFER" | "UPI" | "CHEQUE" | "CASH" | "CARD" | "NEFT" | "RTGS" | "OTHER";
 
 export type LeadSource =
   | "WEBSITE"
@@ -61,12 +38,7 @@ export type LeadSource =
   | "EXHIBITION";
 
 export type UserRole =
-  | "SUPER_ADMIN"
-  | "ADMIN"
-  | "SALES_MANAGER"
-  | "SALES_EXECUTIVE"
-  | "ACCOUNTS"
-  | "PROJECT_MANAGER";
+  "SUPER_ADMIN" | "ADMIN" | "SALES_MANAGER" | "SALES_EXECUTIVE" | "ACCOUNTS" | "PROJECT_MANAGER";
 
 export type DocumentType =
   | "PAN"
@@ -81,14 +53,7 @@ export type DocumentType =
   | "OTHER";
 
 export type EntityKind =
-  | "LEAD"
-  | "CUSTOMER"
-  | "PROJECT"
-  | "UNIT"
-  | "BOOKING"
-  | "AGREEMENT"
-  | "INVOICE"
-  | "PAYMENT";
+  "LEAD" | "CUSTOMER" | "PROJECT" | "UNIT" | "BOOKING" | "AGREEMENT" | "INVOICE" | "PAYMENT";
 
 export interface BaseEntity {
   id: string;

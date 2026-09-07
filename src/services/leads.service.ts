@@ -7,7 +7,8 @@ const base = createCrudService("leads", {
   codePrefix: "LD-",
   codeStart: 3001,
   searchFields: ["name", "phone", "email", "code"],
-  beforeCreate: (draft) => logActivity("LEAD", draft.id, "Lead created", `${draft.name} added to pipeline`),
+  beforeCreate: (draft) =>
+    logActivity("LEAD", draft.id, "Lead created", `${draft.name} added to pipeline`),
 });
 
 export const leadService = {
@@ -42,7 +43,12 @@ export const leadService = {
       db.customers.unshift(customer);
       lead.status = "CONVERTED";
       lead.updatedAt = nowIso();
-      logActivity("LEAD", lead.id, "Converted", `${lead.name} converted to customer ${customer.code}`);
+      logActivity(
+        "LEAD",
+        lead.id,
+        "Converted",
+        `${lead.name} converted to customer ${customer.code}`,
+      );
       return customer;
     });
   },

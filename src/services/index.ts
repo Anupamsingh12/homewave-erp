@@ -1,16 +1,20 @@
 import { createCrudService, logActivity } from "./crud";
 import { ApiError, getDb, nextCode, nextId, nowIso, request } from "./api/client";
-import { bookingFinance, invoiceTotal, releaseExpiredHolds, summarizeInvoice } from "./derive";
-import type {
-  Agreement,
-  Booking,
-  Commission,
-  Invoice,
-  Payment,
-  Unit,
-} from "@/types";
+import {
+  bookingFinance,
+  customerFinance,
+  customerLedger,
+  invoiceTotal,
+  paymentStatusOf,
+  projectStats,
+  releaseExpiredHolds,
+  summarizeInvoice,
+  unitTotal,
+} from "./derive";
+import type { Agreement, Booking, Commission, Invoice, Payment, Unit } from "@/types";
 
 export { leadService } from "./leads.service";
+export { analyticsService } from "./analytics.service";
 
 export const userService = createCrudService("users", {
   idPrefix: "usr",
@@ -31,27 +35,34 @@ export const siteVisitService = createCrudService("siteVisits", {
   searchFields: ["code", "notes"],
 });
 
-export const customerService = createCrudService("customers", {
-  idPrefix: "cus",
-  codePrefix: "CUST-",
-  codeStart: 2001,
-  searchFields: ["name", "phone", "email", "code", "city"],
-  guardDelete: (row, db) =>
-    db.bookings.some((b) => b.customerId === row.id)
-      ? "Customer has bookings and cannot be deleted."
-      : null,
-});
+export const customerService = {
+  ...createCrudService("customers", {
+    idPrefix: "cus",
+    codePrefix: "CUST-",
+    codeStart: 2001,
+    searchFields: ["name", "phone", "email", "code", "city"],
+    guardDelete: (row, db) =>
+      db.bookings.some((b) => b.customerId === row.id)
+        ? "Customer has bookings and cannot be deleted."
+        : null,
+  }),
+  finance: customerFinance,
+  ledger: customerLedger,
+};
 
-export const projectService = createCrudService("projects", {
-  idPrefix: "prj",
-  codePrefix: "PRJ-",
-  codeStart: 101,
-  searchFields: ["name", "city", "code", "developer", "reraNumber"],
-  guardDelete: (row, db) =>
-    db.bookings.some((b) => b.projectId === row.id)
-      ? "Project has bookings. Archive it instead."
-      : null,
-});
+export const projectService = {
+  ...createCrudService("projects", {
+    idPrefix: "prj",
+    codePrefix: "PRJ-",
+    codeStart: 101,
+    searchFields: ["name", "city", "code", "developer", "reraNumber"],
+    guardDelete: (row, db) =>
+      db.bookings.some((b) => b.projectId === row.id)
+        ? "Project has bookings. Archive it instead."
+        : null,
+  }),
+  stats: projectStats,
+};
 
 export const towerService = createCrudService("towers", {
   idPrefix: "twr",
@@ -123,7 +134,10 @@ export const unitService = {
     releaseExpiredHolds();
     return unitBase.list(query);
   },
-  hold(id: string, input: { customerId: string; salespersonId: string; hours: number; reason: string }) {
+  hold(
+    id: string,
+    input: { customerId: string; salespersonId: string; hours: number; reason: string },
+  ) {
     return request(`/units/${id}/hold`, () => {
       const db = getDb();
       const unit = db.units.find((u) => u.id === id);
@@ -173,6 +187,7 @@ export const unitService = {
       return unit as Unit;
     });
   },
+  total: unitTotal,
 };
 
 /* --------------------------------------------------------------- bookings */
@@ -282,7 +297,12 @@ export const bookingService = {
         }
       }
 
-      logActivity("BOOKING", booking.id, "Booking created", `${booking.code} for unit ${unit.code}`);
+      logActivity(
+        "BOOKING",
+        booking.id,
+        "Booking created",
+        `${booking.code} for unit ${unit.code}`,
+      );
       return booking;
     });
   },
@@ -298,9 +318,7 @@ export const bookingService = {
       db.invoices
         .filter((i) => i.bookingId === id && i.status !== "PAID")
         .forEach((i) => (i.status = "CANCELLED"));
-      db.commissions
-        .filter((c) => c.bookingId === id)
-        .forEach((c) => (c.status = "CANCELLED"));
+      db.commissions.filter((c) => c.bookingId === id).forEach((c) => (c.status = "CANCELLED"));
       logActivity("BOOKING", id, "Booking cancelled", reason || "Cancelled by admin");
       return booking;
     });
@@ -328,6 +346,8 @@ export const bookingService = {
       return agreement;
     });
   },
+  finance: bookingFinance,
+  paymentStatus: (bookingId: string) => paymentStatusOf(bookingFinance(bookingId)),
 };
 
 /* --------------------------------------------------------------- invoices */

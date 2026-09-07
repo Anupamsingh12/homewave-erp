@@ -10,33 +10,336 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgreementsRouteImport } from './routes/agreements'
+import { Route as BookingsRouteImport } from './routes/bookings'
+import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as CommissionsRouteImport } from './routes/commissions'
+import { Route as ConstructionRouteImport } from './routes/construction'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as FollowUpsRouteImport } from './routes/follow-ups'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as InvoicesRouteImport } from './routes/invoices'
+import { Route as PaymentPlansRouteImport } from './routes/payment-plans'
+import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SiteVisitsRouteImport } from './routes/site-visits'
+import { Route as CustomersIndexRouteImport } from './routes/customers/index'
+import { Route as CustomersIdRouteImport } from './routes/customers/$id'
+import { Route as LeadsIndexRouteImport } from './routes/leads/index'
+import { Route as LeadsIdRouteImport } from './routes/leads/$id'
+import { Route as LeadsKanbanRouteImport } from './routes/leads/kanban'
+import { Route as PartnersIndexRouteImport } from './routes/partners/index'
+import { Route as PartnersIdRouteImport } from './routes/partners/$id'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
+import { Route as ProjectsIdRouteImport } from './routes/projects/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgreementsRoute = AgreementsRouteImport.update({
+  id: '/agreements',
+  path: '/agreements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommissionsRoute = CommissionsRouteImport.update({
+  id: '/commissions',
+  path: '/commissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstructionRoute = ConstructionRouteImport.update({
+  id: '/construction',
+  path: '/construction',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FollowUpsRoute = FollowUpsRouteImport.update({
+  id: '/follow-ups',
+  path: '/follow-ups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoicesRoute = InvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentPlansRoute = PaymentPlansRouteImport.update({
+  id: '/payment-plans',
+  path: '/payment-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteVisitsRoute = SiteVisitsRouteImport.update({
+  id: '/site-visits',
+  path: '/site-visits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIndexRoute = CustomersIndexRouteImport.update({
+  id: '/customers/',
+  path: '/customers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIdRoute = CustomersIdRouteImport.update({
+  id: '/customers/$id',
+  path: '/customers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsIndexRoute = LeadsIndexRouteImport.update({
+  id: '/leads/',
+  path: '/leads/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsIdRoute = LeadsIdRouteImport.update({
+  id: '/leads/$id',
+  path: '/leads/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsKanbanRoute = LeadsKanbanRouteImport.update({
+  id: '/leads/kanban',
+  path: '/leads/kanban',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersIndexRoute = PartnersIndexRouteImport.update({
+  id: '/partners/',
+  path: '/partners/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersIdRoute = PartnersIdRouteImport.update({
+  id: '/partners/$id',
+  path: '/partners/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
+  '/bookings': typeof BookingsRoute
+  '/collections': typeof CollectionsRoute
+  '/commissions': typeof CommissionsRoute
+  '/construction': typeof ConstructionRoute
+  '/documents': typeof DocumentsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/inventory': typeof InventoryRoute
+  '/invoices': typeof InvoicesRoute
+  '/payment-plans': typeof PaymentPlansRoute
+  '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/site-visits': typeof SiteVisitsRoute
+  '/customers/$id': typeof CustomersIdRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads/kanban': typeof LeadsKanbanRoute
+  '/partners/$id': typeof PartnersIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/customers/': typeof CustomersIndexRoute
+  '/leads/': typeof LeadsIndexRoute
+  '/partners/': typeof PartnersIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
+  '/bookings': typeof BookingsRoute
+  '/collections': typeof CollectionsRoute
+  '/commissions': typeof CommissionsRoute
+  '/construction': typeof ConstructionRoute
+  '/documents': typeof DocumentsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/inventory': typeof InventoryRoute
+  '/invoices': typeof InvoicesRoute
+  '/payment-plans': typeof PaymentPlansRoute
+  '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/site-visits': typeof SiteVisitsRoute
+  '/customers/$id': typeof CustomersIdRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads/kanban': typeof LeadsKanbanRoute
+  '/partners/$id': typeof PartnersIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/customers': typeof CustomersIndexRoute
+  '/leads': typeof LeadsIndexRoute
+  '/partners': typeof PartnersIndexRoute
+  '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agreements': typeof AgreementsRoute
+  '/bookings': typeof BookingsRoute
+  '/collections': typeof CollectionsRoute
+  '/commissions': typeof CommissionsRoute
+  '/construction': typeof ConstructionRoute
+  '/documents': typeof DocumentsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/inventory': typeof InventoryRoute
+  '/invoices': typeof InvoicesRoute
+  '/payment-plans': typeof PaymentPlansRoute
+  '/payments': typeof PaymentsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/site-visits': typeof SiteVisitsRoute
+  '/customers/$id': typeof CustomersIdRoute
+  '/leads/$id': typeof LeadsIdRoute
+  '/leads/kanban': typeof LeadsKanbanRoute
+  '/partners/$id': typeof PartnersIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/customers/': typeof CustomersIndexRoute
+  '/leads/': typeof LeadsIndexRoute
+  '/partners/': typeof PartnersIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agreements'
+    | '/bookings'
+    | '/collections'
+    | '/commissions'
+    | '/construction'
+    | '/documents'
+    | '/follow-ups'
+    | '/inventory'
+    | '/invoices'
+    | '/payment-plans'
+    | '/payments'
+    | '/reports'
+    | '/settings'
+    | '/site-visits'
+    | '/customers/$id'
+    | '/leads/$id'
+    | '/leads/kanban'
+    | '/partners/$id'
+    | '/projects/$id'
+    | '/customers/'
+    | '/leads/'
+    | '/partners/'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agreements'
+    | '/bookings'
+    | '/collections'
+    | '/commissions'
+    | '/construction'
+    | '/documents'
+    | '/follow-ups'
+    | '/inventory'
+    | '/invoices'
+    | '/payment-plans'
+    | '/payments'
+    | '/reports'
+    | '/settings'
+    | '/site-visits'
+    | '/customers/$id'
+    | '/leads/$id'
+    | '/leads/kanban'
+    | '/partners/$id'
+    | '/projects/$id'
+    | '/customers'
+    | '/leads'
+    | '/partners'
+    | '/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/agreements'
+    | '/bookings'
+    | '/collections'
+    | '/commissions'
+    | '/construction'
+    | '/documents'
+    | '/follow-ups'
+    | '/inventory'
+    | '/invoices'
+    | '/payment-plans'
+    | '/payments'
+    | '/reports'
+    | '/settings'
+    | '/site-visits'
+    | '/customers/$id'
+    | '/leads/$id'
+    | '/leads/kanban'
+    | '/partners/$id'
+    | '/projects/$id'
+    | '/customers/'
+    | '/leads/'
+    | '/partners/'
+    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgreementsRoute: typeof AgreementsRoute
+  BookingsRoute: typeof BookingsRoute
+  CollectionsRoute: typeof CollectionsRoute
+  CommissionsRoute: typeof CommissionsRoute
+  ConstructionRoute: typeof ConstructionRoute
+  DocumentsRoute: typeof DocumentsRoute
+  FollowUpsRoute: typeof FollowUpsRoute
+  InventoryRoute: typeof InventoryRoute
+  InvoicesRoute: typeof InvoicesRoute
+  PaymentPlansRoute: typeof PaymentPlansRoute
+  PaymentsRoute: typeof PaymentsRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
+  SiteVisitsRoute: typeof SiteVisitsRoute
+  CustomersIdRoute: typeof CustomersIdRoute
+  LeadsIdRoute: typeof LeadsIdRoute
+  LeadsKanbanRoute: typeof LeadsKanbanRoute
+  PartnersIdRoute: typeof PartnersIdRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
+  CustomersIndexRoute: typeof CustomersIndexRoute
+  LeadsIndexRoute: typeof LeadsIndexRoute
+  PartnersIndexRoute: typeof PartnersIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +351,195 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agreements': {
+      id: '/agreements'
+      path: '/agreements'
+      fullPath: '/agreements'
+      preLoaderRoute: typeof AgreementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commissions': {
+      id: '/commissions'
+      path: '/commissions'
+      fullPath: '/commissions'
+      preLoaderRoute: typeof CommissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/construction': {
+      id: '/construction'
+      path: '/construction'
+      fullPath: '/construction'
+      preLoaderRoute: typeof ConstructionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/follow-ups': {
+      id: '/follow-ups'
+      path: '/follow-ups'
+      fullPath: '/follow-ups'
+      preLoaderRoute: typeof FollowUpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoices': {
+      id: '/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof InvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-plans': {
+      id: '/payment-plans'
+      path: '/payment-plans'
+      fullPath: '/payment-plans'
+      preLoaderRoute: typeof PaymentPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-visits': {
+      id: '/site-visits'
+      path: '/site-visits'
+      fullPath: '/site-visits'
+      preLoaderRoute: typeof SiteVisitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/': {
+      id: '/customers/'
+      path: '/customers'
+      fullPath: '/customers/'
+      preLoaderRoute: typeof CustomersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/$id': {
+      id: '/customers/$id'
+      path: '/customers/$id'
+      fullPath: '/customers/$id'
+      preLoaderRoute: typeof CustomersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads/': {
+      id: '/leads/'
+      path: '/leads'
+      fullPath: '/leads/'
+      preLoaderRoute: typeof LeadsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads/$id': {
+      id: '/leads/$id'
+      path: '/leads/$id'
+      fullPath: '/leads/$id'
+      preLoaderRoute: typeof LeadsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads/kanban': {
+      id: '/leads/kanban'
+      path: '/leads/kanban'
+      fullPath: '/leads/kanban'
+      preLoaderRoute: typeof LeadsKanbanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners/': {
+      id: '/partners/'
+      path: '/partners'
+      fullPath: '/partners/'
+      preLoaderRoute: typeof PartnersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners/$id': {
+      id: '/partners/$id'
+      path: '/partners/$id'
+      fullPath: '/partners/$id'
+      preLoaderRoute: typeof PartnersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$id': {
+      id: '/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgreementsRoute: AgreementsRoute,
+  BookingsRoute: BookingsRoute,
+  CollectionsRoute: CollectionsRoute,
+  CommissionsRoute: CommissionsRoute,
+  ConstructionRoute: ConstructionRoute,
+  DocumentsRoute: DocumentsRoute,
+  FollowUpsRoute: FollowUpsRoute,
+  InventoryRoute: InventoryRoute,
+  InvoicesRoute: InvoicesRoute,
+  PaymentPlansRoute: PaymentPlansRoute,
+  PaymentsRoute: PaymentsRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
+  SiteVisitsRoute: SiteVisitsRoute,
+  CustomersIdRoute: CustomersIdRoute,
+  LeadsIdRoute: LeadsIdRoute,
+  LeadsKanbanRoute: LeadsKanbanRoute,
+  PartnersIdRoute: PartnersIdRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
+  CustomersIndexRoute: CustomersIndexRoute,
+  LeadsIndexRoute: LeadsIndexRoute,
+  PartnersIndexRoute: PartnersIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -123,7 +123,9 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           <ul className="space-y-0.5">
             {section.items.map((item) => {
               const active =
-                item.to === "/" ? pathname === "/" : pathname === item.to || pathname.startsWith(`${item.to}/`);
+                item.to === "/"
+                  ? pathname === "/"
+                  : pathname === item.to || pathname.startsWith(`${item.to}/`);
               return (
                 <li key={item.to}>
                   <Link
@@ -173,7 +175,10 @@ export function AppShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const allItems = useMemo(() => NAV_SECTIONS.flatMap((s) => s.items.map((i) => ({ ...i, section: s.title }))), []);
+  const allItems = useMemo(
+    () => NAV_SECTIONS.flatMap((s) => s.items.map((i) => ({ ...i, section: s.title }))),
+    [],
+  );
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -212,7 +217,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           </button>
 
           <div className="ml-auto flex items-center gap-1.5">
-            <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setDark((d) => !d)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Toggle theme"
+              onClick={() => setDark((d) => !d)}
+            >
               {dark ? <Sun className="size-4.5" /> : <Moon className="size-4.5" />}
             </Button>
             <Button variant="ghost" size="icon" aria-label="Notifications">

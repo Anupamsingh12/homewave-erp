@@ -3,6 +3,7 @@ import { useData } from "./use-erp";
 import {
   channelPartnerService,
   customerService,
+  leadService,
   paymentPlanService,
   projectService,
   towerService,
@@ -19,6 +20,7 @@ export function useLookups() {
   const customers = useData(["customers", "all"], customerService.all);
   const partners = useData(["channelPartners", "all"], channelPartnerService.all);
   const plans = useData(["paymentPlans", "all"], paymentPlanService.all);
+  const leads = useData(["leads", "all"], leadService.all);
 
   return useMemo(() => {
     const map = <T extends { id: string }>(rows: T[] | undefined) =>
@@ -30,6 +32,10 @@ export function useLookups() {
     const customerMap = map(customers.data);
     const partnerMap = map(partners.data);
     const planMap = map(plans.data);
+    const leadMap = map(leads.data);
+
+    const customerName = (id?: string | null) => (id && customerMap.get(id)?.name) || "—";
+    const leadName = (id?: string | null) => (id && leadMap.get(id)?.name) || "—";
 
     return {
       users: users.data ?? [],
@@ -39,20 +45,25 @@ export function useLookups() {
       customers: customers.data ?? [],
       partners: partners.data ?? [],
       plans: plans.data ?? [],
+      leads: leads.data ?? [],
       loading:
         users.isLoading ||
         projects.isLoading ||
         towers.isLoading ||
         units.isLoading ||
-        customers.isLoading,
+        customers.isLoading ||
+        leads.isLoading,
       userName: (id?: string | null) => (id && userMap.get(id)?.name) || "—",
       projectName: (id?: string | null) => (id && projectMap.get(id)?.name) || "—",
       towerName: (id?: string | null) => (id && towerMap.get(id)?.name) || "—",
       unit: (id?: string | null) => (id ? unitMap.get(id) : undefined),
       unitCode: (id?: string | null) => (id && unitMap.get(id)?.code) || "—",
-      customerName: (id?: string | null) => (id && customerMap.get(id)?.name) || "—",
+      customerName,
       partnerName: (id?: string | null) => (id && partnerMap.get(id)?.company) || "Direct",
       planName: (id?: string | null) => (id && planMap.get(id)?.name) || "—",
+      leadName,
+      relatedName: (row: { leadId: string | null; customerId: string | null }) =>
+        row.customerId ? customerName(row.customerId) : leadName(row.leadId),
     };
-  }, [users, projects, towers, units, customers, partners, plans]);
+  }, [users, projects, towers, units, customers, partners, plans, leads]);
 }

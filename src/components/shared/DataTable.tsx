@@ -28,6 +28,7 @@ export interface FilterDef<T> {
   label: string;
   options: string[];
   match: (row: T, value: string) => boolean;
+  optionLabel?: (value: string) => string;
 }
 
 export function DataTable<T extends { id: string }>({
@@ -65,7 +66,11 @@ export function DataTable<T extends { id: string }>({
     const term = search.trim().toLowerCase();
     if (term && searchFields?.length) {
       out = out.filter((r) =>
-        searchFields.some((f) => String(r[f] ?? "").toLowerCase().includes(term)),
+        searchFields.some((f) =>
+          String(r[f] ?? "")
+            .toLowerCase()
+            .includes(term),
+        ),
       );
     }
     for (const f of filters ?? []) {
@@ -122,7 +127,7 @@ export function DataTable<T extends { id: string }>({
               <SelectItem value="ALL">All {f.label}</SelectItem>
               {f.options.map((o) => (
                 <SelectItem key={o} value={o}>
-                  {titleize(o)}
+                  {f.optionLabel ? f.optionLabel(o) : titleize(o)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -223,7 +228,10 @@ export function DataTable<T extends { id: string }>({
         </div>
         {!loading && !visible.length && (
           <div className="p-4">
-            <EmptyState title={emptyTitle ?? "No records found"} description={emptyDescription} />
+            <EmptyState
+              title={emptyTitle ?? "No records found"}
+              {...(emptyDescription ? { description: emptyDescription } : {})}
+            />
           </div>
         )}
       </div>
